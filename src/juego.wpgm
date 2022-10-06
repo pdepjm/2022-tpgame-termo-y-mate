@@ -1,8 +1,32 @@
 import wollok.game.*
 import pepita.*
+import direcciones.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.start()
+	game.title("Dodgy Bird")
+	game.width(85)
+ 	game.height(45)
+  	game.cellSize(15)
+  	game.boardGround("cielo.jpg")
+  	game.addVisual(nube1)
+  	game.addVisual(nube2)
+  	game.addVisual(nube3)
+  	// hacer onTick general, que se repita infinitamente
+  	game.onTick(50, "nubeMoviendose", {nube1.moverseA(izquierda) })
+  	game.onTick(50, "nubeMoviendose", {nube2.moverseA(izquierda) })
+  	game.onTick(50, "nubeMoviendose", {nube3.moverseA(izquierda) })
+  	game.schedule(3800, {nube1.volverADerecha()})
+  	game.schedule(6500, {nube2.volverADerecha()})
+  	game.schedule(4800, {nube3.volverADerecha()})
+  	
+  	game.addVisualCharacter(marvin)
+        //keyboard.w().onPressDo({marvin.moverA(arriba)}) 
+        //keyboard.d().onPressDo({marvin.moverA(derecha)}) 
+        //keyboard.a().onPressDo({marvin.moverA(izquierda)}) 
+        //keyboard.s().onPressDo({marvin.moverA(abajo)}) 
+  	game.start()
+  	
+  	
 }
+
+
