@@ -9,9 +9,9 @@ object marvin {
 	method actualizarImagen(imagen) {
 		image = imagen
 	}
-	method chocoConEnemigo(enemigo) = position == enemigo.position()
+	//method chocoConEnemigo(enemigo) = position == enemigo.position()
 	
-	method muerte(enemigo) {
+	method muerte() {
 		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
 		game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
 		game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
@@ -25,7 +25,6 @@ object marvin {
 		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
 		game.schedule(800, {self.actualizarImagen("pajaro1.png")})
 	}
-	 // en init()
 	 
 	method subirMucho() {
         position = position.up(5)
