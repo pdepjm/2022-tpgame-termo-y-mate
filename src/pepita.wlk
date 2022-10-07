@@ -125,14 +125,14 @@ object globo inherits Enemigo (
  	method init(){
 		game.onTick(15000,"SpawnearGlobo",{self.spawnear()})
 		game.addVisual(self)
-		game.onTick(14000,"AumentarDificultad",{self.velocidadRandom()})
+		self.subirDificultad()
 		self.moverseEnDireccion(velocidadIzquierda, velocidadDireccion)
 		
 	}
 	method subirDificultad() {
-		game.onTick(5000,"AumentarDificultad",{self.velocidadRandom()})
+		game.onTick(5000,"AumentarDificultad",{self.aumentarVelocidad()})
 	}
-	method velocidadRandom()
+	method aumentarVelocidad()
 	{
 		velocidadIzquierda += 5000
 		velocidadDireccion += 5000
