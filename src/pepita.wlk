@@ -9,24 +9,42 @@ object marvin {
 	method actualizarImagen(imagen) {
 		image = imagen
 	}
-	method muerte() {
+	method chocoConEnemigo(enemigo) = position == enemigo.position()
+	
+	method muerte(enemigo) {
 		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
 		game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
 		game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
 		game.schedule(400, {self.actualizarImagen("pajaroMuerto4.png")})
 		estaVivo = false
 	}
-	method animacionVuelo(){
+	method volar(){
 		
 		game.schedule(200, {self.actualizarImagen("pajaro2.png")})
 		game.schedule(400, {self.actualizarImagen("pajaro3.png")})
 		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
 		game.schedule(800, {self.actualizarImagen("pajaro1.png")})
 	}
-	
+	 // en init()
+	 
+	method subirMucho() {
+        position = position.up(5)
+    }
+    method moverse(direccion) {
+            position = direccion.siguientePosicion(position, 2)
+            }
+     
+    method controles(){
+    	keyboard.w().onPressDo {self.moverse(arriba)}
+    	keyboard.d().onPressDo {self.moverse(derecha)}
+    	keyboard.s().onPressDo {self.moverse(abajo)}
+    	keyboard.a().onPressDo {self.moverse(izquierda)}
+    	keyboard.space().onPressDo {self.subirMucho()}
+    }
 	method init() {
-		game.addVisualCharacter(self)
-		game.onTick(1000, "Volar",{self.animacionVuelo()})
+		game.addVisual(self)
+		game.onTick(1000, "Volar",{self.volar()})
+		self.controles()
 	}
 }
 
@@ -88,12 +106,14 @@ object fondo {
   		game.addVisual(nube2)
   		game.addVisual(nube3)
 		game.boardGround("cielo.jpg")
-		nubes.forEach({nube => nube.moverseSiempreAIzq()})
-		nubes.forEach({nube => nube.volverAEmpezar()})
+		nubes.forEach({nube => 
+			nube.moverseSiempreAIzq()
+			nube.volverAEmpezar()
+		})
 	}
 }
 class Enemigo {
-	var property position = game.at(60,20)
+	var property position
 	var property image
 	var direccion
 	var limiteX
@@ -109,12 +129,13 @@ class Enemigo {
 	}
 	//siempre se mueve a izquierda y hacia una direccion que definamos
 	method moverseEnDireccion(velocidadIzquierda, velocidadDireccion){
-		game.onTick(velocidadIzquierda, "EnemigoMoviendose", {self.moverseA(izquierda) })
-		game.onTick(velocidadDireccion, "EnemigoMoviendose", {self.moverseA(direccion)})
+		game.onTick(velocidadIzquierda, "EnemigoMoviendose1", {self.moverseA(izquierda) })
+		game.onTick(velocidadDireccion, "EnemigoMoviendose2", {self.moverseA(direccion)})
 	}
 	
 }
 object globo inherits Enemigo (
+	position = game.at(70,20),
 	image = "HotAirBalloon_1.png", 
 	limiteX = 70, 
 	limiteY = 10, 
@@ -123,19 +144,22 @@ object globo inherits Enemigo (
  	var velocidadIzquierda = 100
  	var velocidadDireccion = 400
  	method init(){
+ 		game.addVisual(self)
+ 		self.moverseEnDireccion(velocidadIzquierda, velocidadDireccion)
 		game.onTick(15000,"SpawnearGlobo",{self.spawnear()})
-		game.addVisual(self)
-		self.subirDificultad()
+		game.onTick(30000,"aumentardificultad",{self.subirDificultad()}) //cada 2 globos aumenta la velocidad
+	}
+	method subirDificultad() {
+		self.aumentarVelocidad()
+		game.removeTickEvent("EnemigoMoviendose1")
+		game.removeTickEvent("EnemigoMoviendose2")
 		self.moverseEnDireccion(velocidadIzquierda, velocidadDireccion)
 		
 	}
-	method subirDificultad() {
-		game.onTick(5000,"AumentarDificultad",{self.aumentarVelocidad()})
-	}
 	method aumentarVelocidad()
 	{
-		velocidadIzquierda += 5000
-		velocidadDireccion += 5000
+		velocidadIzquierda = 20.max(velocidadIzquierda - 19)
+		//velocidadDireccion -= 10
 	}
  }
 

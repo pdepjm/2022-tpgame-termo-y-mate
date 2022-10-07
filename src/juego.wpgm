@@ -10,8 +10,8 @@ program juego {
   	
   	fondo.cargarFondo()
   	marvin.init()
-  	
    	globo.init()
+   	game.whenCollideDo(marvin, {enemigo => marvin.muerte(enemigo)})
   	game.start()
   	
   	
