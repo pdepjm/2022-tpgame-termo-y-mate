@@ -11,7 +11,7 @@ program juego {
   	fondo.cargarFondo()
   	marvin.init()
   	
-   
+   	globo.init()
   	game.start()
   	
   	

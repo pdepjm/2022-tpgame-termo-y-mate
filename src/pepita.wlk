@@ -41,7 +41,7 @@ class Nube{
 	method volverADerecha() { 
 		position = resetPosition
 	}
-	method moverseInfinito() {
+	method moverseSiempreAIzq() {
 		game.onTick(50, "nubeMoviendose", {self.moverseA(izquierda) })
 	}
 
@@ -88,10 +88,60 @@ object fondo {
   		game.addVisual(nube2)
   		game.addVisual(nube3)
 		game.boardGround("cielo.jpg")
-		nubes.forEach({nube => nube.moverseInfinito()})
+		nubes.forEach({nube => nube.moverseSiempreAIzq()})
 		nubes.forEach({nube => nube.volverAEmpezar()})
 	}
 }
+class Enemigo {
+	var property position = game.at(60,20)
+	var property image
+	var direccion
+	var limiteX
+	var limiteY
+	method spawnear (){
+		 const x = limiteX.randomUpTo(game.width().truncate(0))
+   		 const y = limiteY.randomUpTo(game.height().truncate(0))
+   		 position = game.at(x,y)
+	}
+	//elegir direccion para que se mueva
+	method moverseA(direccion_){
+		position = direccion_.siguientePosicion(position)
+	}
+	//siempre se mueve a izquierda y hacia una direccion que definamos
+	method moverseEnDireccion(velocidadIzquierda, velocidadDireccion){
+		game.onTick(velocidadIzquierda, "EnemigoMoviendose", {self.moverseA(izquierda) })
+		game.onTick(velocidadDireccion, "EnemigoMoviendose", {self.moverseA(direccion)})
+	}
+	
+}
+object globo inherits Enemigo (
+	image = "HotAirBalloon_1.png", 
+	limiteX = 70, 
+	limiteY = 10, 
+	direccion = abajo
+ ){
+ 	var velocidadIzquierda = 100
+ 	var velocidadDireccion = 400
+ 	method init(){
+		game.onTick(15000,"SpawnearGlobo",{self.spawnear()})
+		game.addVisual(self)
+		game.onTick(14000,"AumentarDificultad",{self.velocidadRandom()})
+		self.moverseEnDireccion(velocidadIzquierda, velocidadDireccion)
+		
+	}
+	method subirDificultad() {
+		game.onTick(5000,"AumentarDificultad",{self.velocidadRandom()})
+	}
+	method velocidadRandom()
+	{
+		velocidadIzquierda += 5000
+		velocidadDireccion += 5000
+	}
+ }
+
+
+
+
 
 object avion {
 	
@@ -102,10 +152,6 @@ object cazador {
 	
 }
 
-object globo {
-	
-	
-}
 
 object edificio {
 	
