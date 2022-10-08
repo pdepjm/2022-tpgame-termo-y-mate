@@ -9,8 +9,9 @@ program juego {
   	game.cellSize(15)
   	
   	fondo.cargarFondo()
-  	marvin.init()
+  	
    	globo.init()
+   	marvin.init()
     //game.whenCollideDo(marvin, {enemigo => marvin.muerte(enemigo)}) no se como hacer para que colisionen
   	game.start()
   	

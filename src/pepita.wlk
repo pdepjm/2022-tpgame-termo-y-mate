@@ -9,13 +9,19 @@ object marvin {
 	method actualizarImagen(imagen) {
 		image = imagen
 	}
-	//method chocoConEnemigo(enemigo) = position == enemigo.position()
+	
+	// posible solucion para la colision
+	// otra forma seria haciendo que coincida el cellsize con el tamaño de los enemigos (o quitando enemigos grandes) y usar whenCollideDo
+	method chocoConEnemigo() = 
+		if(self.position().distance(globo.position()) <= 10) self.muerte()
+		else null
 	
 	method muerte() {
-		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
-		game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
-		game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
-		game.schedule(400, {self.actualizarImagen("pajaroMuerto4.png")})
+		//game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
+		//game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
+		//game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
+		//game.schedule(400, {self.actualizarImagen("pajaroMuerto4.png")})
+		self.actualizarImagen("pajaroMuerto4.png") //al ejecutar chocoConEnemigo() realiza el cambio pero con el schedule no me aparece el cambio
 		estaVivo = false
 	}
 	method volar(){
@@ -131,7 +137,6 @@ class Enemigo {
 		game.onTick(velocidadIzquierda, "EnemigoMoviendose1", {self.moverseA(izquierda) })
 		game.onTick(velocidadDireccion, "EnemigoMoviendose2", {self.moverseA(direccion)})
 	}
-	
 }
 object globo inherits Enemigo (
 	position = game.at(70,20),
@@ -159,6 +164,9 @@ object globo inherits Enemigo (
 	{
 		velocidadIzquierda = 20.max(velocidadIzquierda - 19)
 		//velocidadDireccion -= 10
+	}
+	method cambiarPosition(direccion){
+		position = direccion
 	}
  }
 
