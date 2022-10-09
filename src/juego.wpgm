@@ -4,13 +4,19 @@ import direcciones.*
 
 program juego {
 	game.title("Dodgy Bird")
-	game.width(85)
- 	game.height(45)
-  	game.cellSize(15)
+	game.width(13)
+ 	game.height(7) //nuevas medidas
+  	game.cellSize(100)
+  	
+ 	game.ground("cielo.jpg") //borrar esto si no queres ver las celdas
+ 
   	
   	fondo.cargarFondo()
+  	globo.init()
   	marvin.init()
-   	globo.init()
+   	
+   	cazador.init()
+   	game.whenCollideDo(marvin, {element => element.colisionadoPor()})
     //game.whenCollideDo(marvin, {enemigo => marvin.muerte(enemigo)}) no se como hacer para que colisionen
   	game.start()
   	
