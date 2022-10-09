@@ -1,6 +1,8 @@
 import wollok.game.*
-import pepita.*
+import marvin.*
 import direcciones.*
+import fondo.*
+import enemigos.*
 
 program juego {
 	game.title("Dodgy Bird")
@@ -12,11 +14,11 @@ program juego {
  
   	
   	fondo.cargarFondo()
-  	globo.init()
+  	game.schedule(1000, {globo.init()})
   	marvin.init()
    	
    	cazador.init()
-   	game.whenCollideDo(marvin, {element => element.colisionadoPor()})
+   	game.onCollideDo(marvin, {element => element.colisionadoPor()})
     //game.whenCollideDo(marvin, {enemigo => marvin.muerte(enemigo)}) no se como hacer para que colisionen
   	game.start()
   	
