@@ -14,17 +14,16 @@ program juego {
  
   	
   	fondo.cargarFondo()
-<<<<<<< HEAD
   	game.schedule(1000, {globo.init()})
   	marvin.init()
    	
    	cazador.init()
    	game.onCollideDo(marvin, {element => element.colisionadoPor()})
-=======
+
   	
    	globo.init()
    	marvin.init()
->>>>>>> branch 'master' of https://github.com/pdepjm/2022-tpgame-termo-y-mate.git
+
     //game.whenCollideDo(marvin, {enemigo => marvin.muerte(enemigo)}) no se como hacer para que colisionen
   	game.start()
   	
