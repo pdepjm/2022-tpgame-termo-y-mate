@@ -13,16 +13,13 @@ class Enemigo {
 	method actualizarImagen(imagen) {
 		image = imagen
 	}
-	method spawnear(posicion){
-		game.addVisualIn(self, posicion)
-	}
 	method deSpawnear(){
 		game.removeVisual(self)
 	}
 	method spawnearRandom (limiteX, limiteY){
-		 const x = limiteX.randomUpTo(game.width().truncate(0))
-   		 const y = limiteY.randomUpTo(game.height().truncate(0))
-   		 position = game.at(x,y)
+		const x = (limiteX.. game.width()-1).anyOne()
+		const y = (limiteY.. game.height()-1).anyOne()
+		position = game.at(x,y)
 	}
 	//elegir direccion para que se mueva
 	method moverseA(direccion_){
@@ -30,7 +27,7 @@ class Enemigo {
 	}
 	//siempre se mueve a izquierda y hacia una direccion que definamos
 	method moverseEnDireccion(velocidadDireccion, direccion){
-		game.onTick(velocidadDireccion, "EnemigoMoviendose2", {self.moverseA(direccion)})
+		game.onTick(velocidadDireccion, "EnemigoMoviendose", {self.moverseA(direccion)})
 	}
 	
 }
@@ -38,21 +35,22 @@ object globo inherits Enemigo (
 	position = game.at(13,6),
 	image = "HotAirBalloon_2.png"
  ){
- 	var velocidadIzquierda = 250
+ 	var velocidadIzquierda = 200
  	var velocidadAbajo = 500
  	
  	method init(){
  		game.addVisual(self)
  		self.moverseEnDireccion(velocidadIzquierda, izquierda)
  		self.moverseEnDireccion(velocidadAbajo, abajo)
-		game.onTick(15000,"SpawnearGlobo",{self.spawnearRandom(12, 3)})
+		game.onTick(5000,"SpawnearGlobo",{self.spawnearRandom(12, 5)})
 		game.onTick(30000,"aumentardificultad",{self.subirDificultad()}) //cada 2 globos aumenta la velocidad
 	}
 	method subirDificultad() {
 		self.aumentarVelocidad()
-		game.removeTickEvent("EnemigoMoviendose1")
-		game.removeTickEvent("EnemigoMoviendose2")
-		self.moverseEnDireccion(velocidadIzquierda, velocidadAbajo)
+		game.removeTickEvent("EnemigoMoviendose")
+		game.removeTickEvent("EnemigoMoviendose")
+		self.moverseEnDireccion(velocidadIzquierda, izquierda)
+		self.moverseEnDireccion(velocidadAbajo, abajo)
 		
 	}
 	method aumentarVelocidad()
