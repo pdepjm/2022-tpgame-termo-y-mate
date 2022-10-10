@@ -1,17 +1,14 @@
+
 import wollok.game.*
 import personaje.*
 import direcciones.*
-import iniciadorObjetos.*
 import enemigos.*
 
 object funcionesExtra {
 	
-	method posicionY(unObjeto) { 
-		const y = unObjeto.position().y()
-		return y }
-	method posicionX(unObjeto) { 
-		const x = unObjeto.position().x()
-		return x }
+	method posicionY(unObjeto) = unObjeto.position().y()
+
+	method posicionX(unObjeto) = unObjeto.position().x()
 	
 	
 	method ramdomPosicionTablero(){
@@ -29,7 +26,7 @@ object funcionesExtra {
 		
 	method randomPosicionInicialAviones(){
 		const x = 13
-		const y = (0.. game.width()-1).anyOne()
+		const y = (0.. game.height()-1).anyOne()
 		return game.at(x,y)}
 
 //(tablero de 13,7)
