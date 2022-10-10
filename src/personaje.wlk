@@ -1,7 +1,48 @@
 import wollok.game.*
-import direcciones.*
 
 object marvin {
+  var property position = game.at(0,game.center().y())
+  var property image = "pajaro1.png"
+  var puntos = 0
+    
+    method sumarPuntos(unObjeto){puntos = puntos+unObjeto.puntos()}
+ 	method actualizarImagen(imagenString){
+		image = imagenString }
+    method hablarConUsuario(){ return "GRR"}
+    method eliminarPersonaje(){
+		game.removeVisual(self)} 
+
+method volar(){
+		game.schedule(200, {self.actualizarImagen("pajaro2.png")})
+		game.schedule(400, {self.actualizarImagen("pajaro3.png")})
+		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
+		game.schedule(800, {self.actualizarImagen("pajaro1.png")}) }
+		
+method personajeVolando(){
+		game.onTick(1000,"MarvinTransicionVolando",{self.volar()})
+		
+	}
+
+
+}  // FINALIZA EL OBJETO JUEGO
+ 
+
+	/* 
+	method actualizarImagen(imagenString){
+		image = imagenString }
+	
+	method volar(){
+		game.schedule(200, {self.actualizarImagen("pajaro2.png")})
+		game.schedule(400, {self.actualizarImagen("pajaro3.png")})
+		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
+		game.schedule(800, {self.actualizarImagen("pajaro1.png")}) }
+		
+	method personajeVolando(){
+		game.onTick(1000,"MarvinTransicionVolando",{self.volar()})
+	}
+	*/ // ME ROMPIA EL JAVA
+	
+/*object marvin {
 	var property position = game.at(1,4)
 	var property estaVivo = true
 	var property image = "pajaro1.png"
@@ -9,9 +50,9 @@ object marvin {
 	method actualizarImagen(imagen) {
 		image = imagen
 	}
-	/*method chocoConEnemigo() = 
+	method chocoConEnemigo() = 
 		if(self.position().distance(globo.position()) <= 10) self.muerte()
-		else null*/
+		else null
 	method muerte() {
 		self.actualizarImagen("pajaroMuerto4.png")
 		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
@@ -52,6 +93,7 @@ object marvin {
 		self.controles()
 		
 	}
-}
+}*/
+
 
 
