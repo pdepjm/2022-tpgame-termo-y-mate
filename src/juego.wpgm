@@ -12,21 +12,23 @@ program juego {
   	
  	game.ground("cielo.jpg") //borrar esto si no queres ver las celdas
  
-  	
   	fondo.cargarFondo()
   	game.schedule(1000, {globo.init()})
   	marvin.init()
    	
    	cazador.init()
    	game.onCollideDo(marvin, {element => element.colisionadoPor()})
+	
 	ataqueBombas.init()
 	ataqueAviones.init()
+	
+	//contadorKms.init()
+	aparacerMonedas.init()
+	aparecerVidas.init()
  
    	globo.init()
 
-    //game.whenCollideDo(marvin, {enemigo => marvin.muerte(enemigo)}) no se como hacer para que colisionen
   	game.start()
-  	
   	
 }
 

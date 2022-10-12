@@ -10,8 +10,7 @@ class Nube{
 		position = resetPosition } 
 	method colisionadoPor(){}
 		} // CERRAMOS LA CLASE NUBE
-		
-
+	
 object fondo {
 	
 	const limiteNubeIzquierda = 1

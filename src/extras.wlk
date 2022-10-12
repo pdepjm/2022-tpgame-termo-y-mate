@@ -1,6 +1,4 @@
-
 import wollok.game.*
-import personaje.*
 import direcciones.*
 import enemigos.*
 
@@ -10,24 +8,22 @@ object funcionesExtra {
 
 	method posicionX(unObjeto) = unObjeto.position().x()
 	
-	
-	method ramdomPosicionTablero(){
+	/*method ramdomPosicionTablero(){
 		const x = (0.. game.width()-1).anyOne()
 		const y = (0.. game.width()-1).anyOne()
-		return game.at(x,y) }
-	//method ambosEnMismaPosicion(unObjeto1,unObjeto2){
-		//return unObjeto1.position() == unObjeto2.position() }
+		return game.at(x,y) } */
 	
 	// tablero de (13,7)
-	method randomPosicionInicialBombas(){
+	
+	/*method randomPosicionInicialBombas(){
 		const x = (0.. game.width()-1).anyOne() 
 		const y = 7
-		return game.at(x,y)}
+		return game.at(x,y)}*/
 		
-	method randomPosicionInicialAviones(){
+	/*method randomPosicionInicialAviones(){
 		const x = 13
 		const y = (0.. game.height()-1).anyOne()
-		return game.at(x,y)}
+		return game.at(x,y)} */
 
 //(tablero de 13,7)
 // quiero que el cazador este por el lado bajo derecho del tablero
