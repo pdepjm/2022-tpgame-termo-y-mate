@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+# Dodgy Bird
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Gonzalo Schaller
+- Amira Yucra
+- Agustina Torres
+- Ariel Mendoza
 
 ## Capturas
 
@@ -17,6 +18,6 @@
 
 ## Otros
 
-- Curso/Facultad
+-  k2004 - k2104 / UTN
 - Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado //despues decidirlo
