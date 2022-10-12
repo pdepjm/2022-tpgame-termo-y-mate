@@ -30,6 +30,10 @@ class Enemigo {
 		game.onTick(velocidadDireccion, "EnemigoMoviendose", {self.moverseA(direccion)})
 	}
 	
+	method removerDePantalla(){
+		game.removeVisual(self)
+	}
+	
 }
 
 object globo inherits Enemigo (position = game.at(13,6),image = "./assets/enemigos/HotAirBalloon_2.png" ){
@@ -136,7 +140,8 @@ object ataqueAviones inherits Avion (position = game.center()){
 		aviones.remove(unObjeto) }		
 }
 
-class Bomba inherits Enemigo(position = game.center(), image = "./assets/enemigos/bomba.png"){} 	
+class Bomba inherits Enemigo(position = game.center(), image = "./assets/enemigos/bomba.png"){} 
+	
 object ataqueBombas inherits Bomba (position = game.center()){
 	const bombas =[]
 	const limiteCaidaBombaY = 0

@@ -6,14 +6,17 @@ object marvin {
 	var property position = game.at(1,4)
 	var property estaVivo = true
 	var property image = "./assets/marvin/pajaro1.png"
+	
 	var puntos = 0
 	var vidas = 1
+	
 	const limiteFondoX = 12
 	const limiteFondoY = 6
 
 	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
 	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
 	
+
 	method actualizarImagen(imagen) {
 		image = imagen }
 		
@@ -23,8 +26,10 @@ object marvin {
 		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaroMuerto2.png")})
 		game.schedule(300, {self.actualizarImagen("./assets/marvin/pajaroMuerto3.png")})
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")})
+		game.removeVisual(self)
 		//faltaria poner el removeVisual o pantalla de muerte
-		estaVivo = false }
+		estaVivo = false
+		 }
 
 	method volar(){
 		
@@ -72,7 +77,9 @@ class Moneda inherits CosasUtilesParaMarvin {
 	override method colisionadoPor(){
 		marvin.sumarPuntos(self)
 		game.removeVisual(self)
-		monedero.remove(self)}  }
+		monedero.remove(self)}  
+}
+
 object aparacerMonedas inherits Moneda{
 	
 	method crearMonedas(){
@@ -118,3 +125,14 @@ object contadorKms{
 		game.onTick(500,"RecorridoKms",{contadorKms = contadorKms + 1})}}
 
 */
+
+
+
+
+
+
+
+
+
+
+
