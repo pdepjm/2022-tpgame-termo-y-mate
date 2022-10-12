@@ -32,7 +32,7 @@ class Enemigo {
 	
 }
 
-object globo inherits Enemigo (position = game.at(13,6),image = "HotAirBalloon_2.png" ){
+object globo inherits Enemigo (position = game.at(13,6),image = "./assets/enemigos/HotAirBalloon_2.png" ){
  	var velocidadIzquierda = 200
  	var velocidadAbajo = 500
  	
@@ -88,25 +88,25 @@ class Bala inherits Enemigo(position = cazador.position(),image = "bala1.png"){
 }		
 	
 object cazador inherits Enemigo (
-	position = game.at(11,1),image = "JK_P_Gun__Attack_000.png"){
+	position = game.at(11,1),image = "./assets/enemigos/JK_P_Gun__Attack_000.png"){
 		
-	const bala1 = new Bala(image = "bala1.png", vIzq = 100, vA = 200)
-	const bala2 = new Bala(image = "bala2.png", vIzq = 100, vA = 250)
-	const bala3 = new Bala(image = "bala3.png", vIzq = 100, vA = 400)
-	const bala4 = new Bala(image = "bala4.png", vIzq = 100, vA = 300) 
+	const bala1 = new Bala(image = "./assets/enemigos/bala1.png", vIzq = 100, vA = 200)
+	const bala2 = new Bala(image = "./assets/enemigos/bala2.png", vIzq = 100, vA = 250)
+	const bala3 = new Bala(image = "./assets/enemigos/bala3.png", vIzq = 100, vA = 400)
+	const bala4 = new Bala(image = "./assets/enemigos/bala4.png", vIzq = 100, vA = 300) 
 	
 	const balas = [bala1,bala2,bala3,bala4]	//si se ponen todas las balas aca, tira muchas
 		
 	method spawnearYDisparar(){
 		self.spawnearRandom(8, 0)
 		game.schedule(100, {game.addVisual(self)})
-		game.schedule(200, {self.actualizarImagen("JK_P_Gun__Attack_001.png")})
-		game.schedule(300, {self.actualizarImagen("JK_P_Gun__Attack_002.png")})
+		game.schedule(200, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_001.png")})
+		game.schedule(300, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_002.png")})
 		game.schedule(400, {balas.forEach({bala => bala.init()})})
-		game.schedule(500, {self.actualizarImagen("JK_P_Gun__Attack_003.png")})
-		game.schedule(600, {self.actualizarImagen("JK_P_Gun__Attack_005.png")})
-		game.schedule(700, {self.actualizarImagen("JK_P_Gun__Attack_007.png")})
-		game.schedule(900, {self.actualizarImagen("JK_P_Gun__Attack_009.png")})
+		game.schedule(500, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_003.png")})
+		game.schedule(600, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_005.png")})
+		game.schedule(700, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_007.png")})
+		game.schedule(900, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_009.png")})
 		game.schedule(1500, {self.deSpawnear()})
 	}
 	
@@ -116,7 +116,7 @@ object cazador inherits Enemigo (
 
 
  // VER EL TEMA DE LAS LLAVES EN LA CLASE ENEMIGO Y AVION
-class Avion inherits Enemigo(position = game.center(),image = "avion.png"){}
+class Avion inherits Enemigo(position = game.center(),image = "./assets/enemigos/avion.png"){}
 object ataqueAviones inherits Avion (position = game.center()){
 	const aviones = []
 	const limiteCaidaAvionX = 0
@@ -136,7 +136,7 @@ object ataqueAviones inherits Avion (position = game.center()){
 		aviones.remove(unObjeto) }		
 }
 
-class Bomba inherits Enemigo(position = game.center(), image = "bomba.png"){} 	
+class Bomba inherits Enemigo(position = game.center(), image = "./assets/enemigos/bomba.png"){} 	
 object ataqueBombas inherits Bomba (position = game.center()){
 	const bombas =[]
 	const limiteCaidaBombaY = 0

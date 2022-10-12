@@ -10,7 +10,7 @@ program juego {
  	game.height(7) //nuevas medidas
   	game.cellSize(100)
   	
- 	game.ground("cielo.jpg") //borrar esto si no queres ver las celdas
+ 	game.ground("./assets/fondo/cielo.jpg") //borrar esto si no queres ver las celdas
  
   	fondo.cargarFondo()
   	game.schedule(1000, {globo.init()})

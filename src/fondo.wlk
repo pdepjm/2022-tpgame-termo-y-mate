@@ -14,9 +14,9 @@ class Nube{
 object fondo {	
 	const limiteNubeIzquierda = 1
 	
-	const nube1 = new Nube(resetPosition = game.at(13, 6), position = game.at(11, 5),image = "Cloud_1.png")
-	const nube2 = new Nube(resetPosition = game.at(13, 4), position = game.at(3, 3),image = "Cloud_2.png")
-	const nube3 = new Nube(resetPosition = game.at(13, 2), position = game.at(7, 1),image = "Cloud_2.png") 
+	const nube1 = new Nube(resetPosition = game.at(13, 6), position = game.at(11, 5),image = "./assets/fondo/Cloud_1.png")
+	const nube2 = new Nube(resetPosition = game.at(13, 4), position = game.at(3, 3),image = "./assets/fondo/Cloud_2.png")
+	const nube3 = new Nube(resetPosition = game.at(13, 2), position = game.at(7, 1),image = "./assets/fondo/Cloud_3.png") 
 	
 	const nubes = [nube1, nube2, nube3]
 	

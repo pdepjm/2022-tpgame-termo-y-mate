@@ -1,10 +1,11 @@
 import wollok.game.*
 import direcciones.*
 import extras.*
+
 object marvin {
 	var property position = game.at(1,4)
 	var property estaVivo = true
-	var property image = "pajaro1.png"
+	var property image = "./assets/marvin/pajaro1.png"
 	var puntos = 0
 	var vidas = 1
 	const limiteFondoX = 12
@@ -17,20 +18,20 @@ object marvin {
 		image = imagen }
 		
 	method muerte() {
-		self.actualizarImagen("pajaroMuerto4.png")
-		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
-		game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
-		game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
-		game.schedule(400, {self.actualizarImagen("pajaroMuerto4.png")})
+		self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")
+		game.schedule(100, {self.actualizarImagen("./assets/marvin/pajaroMuerto1.png")})
+		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaroMuerto2.png")})
+		game.schedule(300, {self.actualizarImagen("./assets/marvin/pajaroMuerto3.png")})
+		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")})
 		//faltaria poner el removeVisual o pantalla de muerte
 		estaVivo = false }
 
 	method volar(){
 		
-		game.schedule(200, {self.actualizarImagen("pajaro2.png")})
-		game.schedule(400, {self.actualizarImagen("pajaro3.png")})
-		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
-		game.schedule(800, {self.actualizarImagen("pajaro1.png")})  }
+		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaro2.png")})
+		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaro3.png")})
+		game.schedule(600, {self.actualizarImagen("./assets/marvin/pajaro4.png")})
+		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})  }
 	
     method moverse(direccion) {
             position = direccion.siguientePosicion(position) }
@@ -66,7 +67,7 @@ class CosasUtilesParaMarvin {
 class Moneda inherits CosasUtilesParaMarvin {
 	const property puntosAdiciona=10 
 	const monedero =[]
-	method image() = "moneda.png"
+	method image() = "./assets/powerup/moneda.png"
 	
 	override method colisionadoPor(){
 		marvin.sumarPuntos(self)
@@ -86,7 +87,7 @@ object aparacerMonedas inherits Moneda{
 class Corazon inherits CosasUtilesParaMarvin {
 	const property vidasQueSuma = 1
 	const saludMarvin =[]
-	method image() = "corazon.png"
+	method image() = "./assets/powerup/corazon.png"
 	
 	override method colisionadoPor(){
 		marvin.sumarVidas(self)
