@@ -1,4 +1,4 @@
-# Dodgy Bird
+# Nombre del juego (<- borrar y completar)
 
 ## Equipo de desarrollo
 
@@ -18,6 +18,6 @@
 
 ## Otros
 
--  k2004 - k2104 / UTN
+- Curso/Facultad
 - Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado //despues decidirlo
+- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado

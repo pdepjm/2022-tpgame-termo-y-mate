@@ -11,8 +11,7 @@ class Nube{
 	method colisionadoPor(){}
 		} // CERRAMOS LA CLASE NUBE
 	
-object fondo {
-	
+object fondo {	
 	const limiteNubeIzquierda = 1
 	
 	const nube1 = new Nube(resetPosition = game.at(13, 6), position = game.at(11, 5),image = "Cloud_1.png")
