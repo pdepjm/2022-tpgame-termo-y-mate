@@ -7,11 +7,11 @@ object marvin {
 	var property estaVivo = true
 	var property image = "./assets/marvin/pajaro1.png"
 	
-	var puntos = 0
-	var vidas = 1
+	var property puntos = 0
+	var property vidas = 1
 	
-	const limiteFondoX = 12
-	const limiteFondoY = 6
+	//const limiteFondoX = 12
+	//const limiteFondoY = 6
 
 	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
 	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
@@ -26,35 +26,48 @@ object marvin {
 		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaroMuerto2.png")})
 		game.schedule(300, {self.actualizarImagen("./assets/marvin/pajaroMuerto3.png")})
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")})
-		game.removeVisual(self)
+		//game.removeVisual(self)
 		//faltaria poner el removeVisual o pantalla de muerte
 		estaVivo = false
 		 }
 
 	method volar(){
-		
 		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaro2.png")})
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaro3.png")})
 		game.schedule(600, {self.actualizarImagen("./assets/marvin/pajaro4.png")})
-		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})  }
+		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})  
+		game.onTick(1000, "Volar",{self.volar()})
+		}
 	
     method moverse(direccion) {
             position = direccion.siguientePosicion(position) }
+            
      
     method controles(){
-    	if (funcionesExtra.posicionX(self) != limiteFondoY){ 
-    	keyboard.w().onPressDo {self.moverse(arriba)}
-    	keyboard.s().onPressDo {self.moverse(abajo)}
-    	if (funcionesExtra.posicionX(self) != limiteFondoX)
-    	keyboard.a().onPressDo {self.moverse(izquierda)}
-    	keyboard.d().onPressDo {self.moverse(derecha)}}  }
-    	//keyboard.space().onPressDo {self.subirMucho()}
+    	//if (funcionesExtra.posicionY(self) != limiteFondoY){ 
+    	
+    		keyboard.w().onPressDo {self.moverse(arriba)}
+    		keyboard.s().onPressDo {self.moverse(abajo)} 
+			//}
+    	 
+   // 	if (funcionesExtra.posicionX(self) != limiteFondoX){
+    		keyboard.a().onPressDo {self.moverse(izquierda)}
+    		keyboard.d().onPressDo {self.moverse(derecha)}
+    	//keyboard.space().onPressDo {self.subirMucho()
+    	
+    
+    	}
+    	
+    	
     	
 	method init() {
 		game.addVisual(self)
-		game.onTick(1000, "Volar",{self.volar()})
-		self.controles() }
+		self.volar()
+		self.controles()
+	}
+
 }
+
 
 class CosasUtilesParaMarvin {
 	

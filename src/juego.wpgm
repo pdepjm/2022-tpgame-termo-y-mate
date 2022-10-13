@@ -7,9 +7,9 @@ import manejador.*
 
 program juego {
 	game.title("Dodgy Bird")
-	game.width(13)
- 	game.height(7) //nuevas medidas
-  	game.cellSize(100)
+	game.width(13)               
+ 	game.height(7) //nuevas medidas /7
+  	game.cellSize(100) //100
   	
   	manejadorDeJuego.iniciarJuego()
 

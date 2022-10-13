@@ -39,3 +39,29 @@ object funcionesExtra {
 		return game.at(x,y)}
 		
 } // TERMINA EL OBJETO DE FUNCIONES EXTRA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

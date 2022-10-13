@@ -1,6 +1,73 @@
+import marvin.*
+import wollok.game.*
+import extras.*
+import enemigos.*
+import direcciones.*
 
-test "testX" {
 
-	assert.that(true)
 
+//en verde 
+describe "movimientos de Marvin" {
+	
+	test"Marvin se mueve para arriba"{
+		marvin.moverse(arriba)
+		assert.equals(game.at(1, 5), marvin.position())
+	}
+	test"Marvin se mueve para abajo"{
+		marvin.moverse(abajo)
+		assert.equals(game.at(1, 3), marvin.position())
+	}
+	test "Marvin se mueve para la derecha"{
+		marvin.moverse(derecha)
+		assert.equals(game.at(2, 4), marvin.position())
+	}
+	test "Marvin se mueve para la izquierda"{
+		marvin.moverse(izquierda)
+		assert.equals(game.at(0, 4), marvin.position())
+	}
 }
+
+describe "habilidades de Marvin" {
+	
+	test "Marvin agarra una moneda" {
+		const moneda = new Moneda(position = game.at(2,4))
+		marvin.moverse(derecha)
+		assert.equals(10, marvin.puntos())
+	}
+	
+	test "Marvin agarra un corazon" {
+		const corazon = new Corazon(position = game.at(2,4))
+		marvin.moverse(derecha)
+		assert.equals(2, marvin.vidas())
+	}
+}
+
+
+describe "enemigos"{
+	test"cuando marvin choca con un enemigo muere"{
+		const avion = new Avion(position = game.at(1,5))
+		avion.colisionadoPor()
+		assert.that(not marvin.estaVivo())
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

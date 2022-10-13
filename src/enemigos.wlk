@@ -30,10 +30,6 @@ class Enemigo {
 		game.onTick(velocidadDireccion, "EnemigoMoviendose", {self.moverseA(direccion)})
 	}
 	
-	method removerDePantalla(){
-		game.removeVisual(self)
-	}
-	
 }
 
 object globo inherits Enemigo (position = game.at(13,6),image = "./assets/enemigos/HotAirBalloon_2.png" ){
