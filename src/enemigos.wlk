@@ -112,32 +112,42 @@ object cazador inherits Enemigo (
 		game.schedule(100, {game.addVisual(self)})
 		game.schedule(200, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_001.png")})
 		game.schedule(300, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_002.png")})
-		game.schedule(400, {balas.forEach({bala => bala.init()})})
+		game.schedule(400, {balas.forEach({bala => bala.init()})}) // on tick y random
 		game.schedule(500, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_003.png")})
 		game.schedule(600, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_005.png")})
 		game.schedule(700, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_007.png")})
 		game.schedule(900, {self.actualizarImagen("./assets/enemigos/JK_P_Gun__Attack_009.png")})
 		game.schedule(1500, {self.deSpawnear()})
+		 //tener un contador de balas vivas
 	}
-	
+	/*method subirDificultad(){ //ver como hacer para que ande bien esto, si pongo todas las balas en la lista anda
+		if(balas.size() == 1){
+			balas.add{bala2} }
+		if(balas.size() == 2){
+			balas.add{bala3}}
+		else balas.add{bala4}	}*/
+		
 	method init(){
 			game.onTick(10000,"CazadorAparece",{self.spawnearYDisparar()}) }
 }
 
 
  // VER EL TEMA DE LAS LLAVES EN LA CLASE ENEMIGO Y AVION
-class Avion inherits Enemigo(position = game.center(),image = "./assets/enemigos/avion.png"){}
+class Avion inherits Enemigo(position = game.center(),image = "./assets/enemigos/avion.png",velocidad){}
+
+
+
 object ataqueAviones inherits Avion (position = game.center()){
 	const aviones = []
 	const limiteCaidaAvionX = 0
 	
 	method init(){
 		game.onTick(5000,"laboratorioAviones",{self.crearAvion()})
-		game.onTick(150,"dispararAviones",{aviones.forEach( {avion => if (funcionesExtra.posicionX(avion) != limiteCaidaAvionX)
+		game.onTick(150,"dispararAviones",{aviones.forEach( {avion => if (funcionesExtra.posicionX(avion) != limiteCaidaAvionX) //hacer un objeto que hago esto ara todos
 			{movimientos.moverLeft(avion,1)} else {self.eliminarAvion(avion)}})})   }
 
 	method crearAvion(){
-		const nuevoAvion = new Avion(position = self.spawnearRandom(12,0))
+		const nuevoAvion = new Avion(position = self.spawnearRandom(12,0)) 
 		game.addVisual(nuevoAvion)
 		aviones.add(nuevoAvion) }
 		
@@ -177,11 +187,6 @@ object ataqueBombas inherits Bomba (position = game.center()){
 	
 	
 	
-	/*method subirDificultad(){ //ver como hacer para que ande bien esto, si pongo todas las balas en la lista anda
-		if(balas.size() == 1){
-			balas.add{bala2} }
-		if(balas.size() == 2){
-			balas.add{bala3}}
-		else balas.add{bala4}	}*/
+	
 	
 

@@ -27,6 +27,6 @@ object fondo {
   		//game.boardGround(cielo.jpg)
 		game.onTick(700,"laboratorioDeNubes",{nubes.forEach( {nebesita => if (funcionesExtra.posicionX(nebesita) != limiteNubeIzquierda)
 			{movimientos.moverLeft(nebesita,2)} else {nebesita.volverADerecha()}            }         )     }     )
-		
 }
+		method ola(){}		
 } // CERRAMOS EL METODO CARGAR FONDO

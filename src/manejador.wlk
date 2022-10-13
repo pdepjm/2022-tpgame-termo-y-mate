@@ -17,7 +17,7 @@ object manejadorDeJuego{
   	fondo.cargarFondo()
   	globo.init()
   	marvin.init()
-   	cazador.init()
+   	//cazador.init()
 	ataqueBombas.init()
 	ataqueAviones.init()
 	

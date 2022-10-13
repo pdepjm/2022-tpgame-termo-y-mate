@@ -32,40 +32,37 @@ object marvin {
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")})
 		//game.removeVisual(self)
 		
-		manejadorDeJuego.juegoFinalizado()
+		//manejadorDeJuego.juegoFinalizado()
 		
-		game.schedule(1000,{game.addVisual(fin)})
+		//game.schedule(1000,{game.addVisual(fin)})
 		//faltaria poner el removeVisual o pantalla de muerte
 		estaVivo = false
 		 }
 
 	method volar(){
+		game.onTick(1000, "Volar",{
 		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaro2.png")})
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaro3.png")})
 		game.schedule(600, {self.actualizarImagen("./assets/marvin/pajaro4.png")})
-		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})  
-		game.onTick(1000, "Volar",{self.volar()})
+		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})
+			
+		})
 		}
 	//imagen en funcion del tiempo
 	
     method moverse(direccion) {
-            position = direccion.siguientePosicion(position) }
+            position = direccion.siguientePosicion(position) } //agregar condicional de la posicion aca
             
      
     method controles(){
-    	if (funcionesExtra.posicionY(self) != limiteFondoY-1){ 
+  
     	
     		keyboard.w().onPressDo {self.moverse(arriba)}
     		keyboard.s().onPressDo {self.moverse(abajo)} 
-			}
     	 
-    	if (funcionesExtra.posicionX(self) != limiteFondoX-1){
     		keyboard.a().onPressDo {self.moverse(izquierda)}
     		keyboard.d().onPressDo {self.moverse(derecha)}
-    	//keyboard.space().onPressDo {self.subirMucho()
-    	
-    
-    	}
+    	//keyboard.space().onPressDo {self.subirMucho(
     	}
     	
     	
@@ -80,7 +77,7 @@ object marvin {
 }
 
 
-class CosasUtilesParaMarvin {
+class Coleccionable {
 	
 	var property position = game.center()
 
@@ -93,9 +90,9 @@ class CosasUtilesParaMarvin {
 		return game.at(x,y)} //position = game.at(x,y)
 }
 
-class Moneda inherits CosasUtilesParaMarvin {
+class Moneda inherits Coleccionable {
 	const property puntosAdiciona=10 
-	const monedero =[]
+	
 	method image() = "./assets/powerup/moneda.png"
 	
 	override method colisionadoPor(){
@@ -104,8 +101,8 @@ class Moneda inherits CosasUtilesParaMarvin {
 		monedero.remove(self)}  
 }
 
-object aparacerMonedas inherits Moneda{
-	
+object creadorDeMonedas {
+	const monedero =[]
 	method crearMonedas(){
 		const nuevaMoneda = new Moneda(position = self.spawnearRandom(0,0)) 
 		game.addVisual(nuevaMoneda)
@@ -115,7 +112,7 @@ object aparacerMonedas inherits Moneda{
 	game.onTick(15000,"laboratorioMonedas",{self.crearMonedas()})}
 }
 
-class Corazon inherits CosasUtilesParaMarvin {
+class Corazon inherits Coleccionable {
 	const property vidasQueSuma = 1
 	const saludMarvin =[]
 	method image() = "./assets/powerup/corazon.png"

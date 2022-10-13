@@ -6,7 +6,7 @@ object funcionesExtra {
 	
 	method posicionY(unObjeto) = unObjeto.position().y()
 
-	method posicionX(unObjeto) = unObjeto.position().x()
+	method posicionX(unObjeto) = unObjeto.position().x() //ponerla en direcciones o no ponerla en un objeto
 	
 	/*method ramdomPosicionTablero(){
 		const x = (0.. game.width()-1).anyOne()
@@ -27,16 +27,6 @@ object funcionesExtra {
 
 //(tablero de 13,7)
 // quiero que el cazador este por el lado bajo derecho del tablero
-	
-	method posicionBalas(){
-		const y = self.posicionY(cazador)
-		const x = self.posicionX(cazador)
-		return game.at(x,y)}
-	
-	method ramdonPosicionInicialCazador(){
-		const x = (8.. game.width()-1).anyOne()
-		const y = (1.. 5).anyOne()
-		return game.at(x,y)}
 		
 } // TERMINA EL OBJETO DE FUNCIONES EXTRA
 
