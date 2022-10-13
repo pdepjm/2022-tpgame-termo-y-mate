@@ -1,6 +1,8 @@
 import wollok.game.*
 import direcciones.*
 import extras.*
+import manejador.*
+
 
 object marvin {
 	var property position = game.at(1,4)
@@ -10,8 +12,10 @@ object marvin {
 	var property puntos = 0
 	var property vidas = 1
 	
-	//const limiteFondoX = 12
-	//const limiteFondoY = 6
+	const limiteFondoX = 12
+	const limiteFondoY = 6
+	
+	
 
 	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
 	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
@@ -27,6 +31,10 @@ object marvin {
 		game.schedule(300, {self.actualizarImagen("./assets/marvin/pajaroMuerto3.png")})
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")})
 		//game.removeVisual(self)
+		
+		manejadorDeJuego.juegoFinalizado()
+		
+		game.schedule(1000,{game.addVisual(fin)})
 		//faltaria poner el removeVisual o pantalla de muerte
 		estaVivo = false
 		 }
@@ -38,25 +46,28 @@ object marvin {
 		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})  
 		game.onTick(1000, "Volar",{self.volar()})
 		}
+	//imagen en funcion del tiempo
 	
     method moverse(direccion) {
             position = direccion.siguientePosicion(position) }
             
      
     method controles(){
-    	//if (funcionesExtra.posicionY(self) != limiteFondoY){ 
+    	if (funcionesExtra.posicionY(self) != limiteFondoY-1){ 
     	
     		keyboard.w().onPressDo {self.moverse(arriba)}
     		keyboard.s().onPressDo {self.moverse(abajo)} 
-			//}
+			}
     	 
-   // 	if (funcionesExtra.posicionX(self) != limiteFondoX){
+    	if (funcionesExtra.posicionX(self) != limiteFondoX-1){
     		keyboard.a().onPressDo {self.moverse(izquierda)}
     		keyboard.d().onPressDo {self.moverse(derecha)}
     	//keyboard.space().onPressDo {self.subirMucho()
     	
     
     	}
+    	}
+    	
     	
     	
     	

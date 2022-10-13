@@ -43,7 +43,6 @@ describe "habilidades de Marvin" {
 	}
 }
 
-
 describe "enemigos"{
 	test"cuando marvin choca con un enemigo muere"{
 		const avion = new Avion(position = game.at(1,5))

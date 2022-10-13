@@ -32,15 +32,25 @@ class Enemigo {
 	
 }
 
-object globo inherits Enemigo (position = game.at(13,6),image = "./assets/enemigos/HotAirBalloon_2.png" ){
+object globo inherits Enemigo (position = game.at(12,6),image = "./assets/enemigos/HotAirBalloon_2.png" ){
  	var velocidadIzquierda = 200
  	var velocidadAbajo = 500
+ 	const limiteGloboY = 1
  	
- 	method init(){
- 		game.addVisual(self)
- 		self.moverseEnDireccion(velocidadIzquierda, izquierda)
- 		self.moverseEnDireccion(velocidadAbajo, abajo)
-		game.onTick(5000,"SpawnearGlobo",{self.spawnearRandom(12, 5)}) }
+ 	method init(){	
+		game.onTick(7000,"SpawnearGlobo",{
+			if(funcionesExtra.posicionY(self) != limiteGloboY)
+			{ 	
+				game.addVisual(self)
+				self.moverseEnDireccion(velocidadIzquierda, izquierda)
+ 				self.moverseEnDireccion(velocidadAbajo, abajo)
+ 				}
+ 				else 
+ 					self.deSpawnear()
+ 				})}
+ 					
+					
+		//game.onTick(5000,"SpawnearGlobo",{self.spawnearRandom(12, 5)}) }
 		//game.onTick(30000,"aumentardificultad",{self.subirDificultad()})  	}//cada 2 globos aumenta la velocidad
 	
 	method subirDificultad() {
