@@ -28,16 +28,17 @@ describe "movimientos de Marvin" {
 }
 
 describe "habilidades de Marvin" {
-	
 	test "Marvin agarra una moneda" {
 		const moneda = new Moneda(position = game.at(2,4))
 		marvin.moverse(derecha)
+		moneda.colisionadoPor() //comentando la linea 93 funciona sino hay aparece una exception "El componente visual no se encuentra en el tsblero"
 		assert.equals(10, marvin.puntos())
 	}
 	
 	test "Marvin agarra un corazon" {
 		const corazon = new Corazon(position = game.at(2,4))
 		marvin.moverse(derecha)
+		corazon.colisionadoPor() //pasa lo mismo que en el test anterior, comentando la linea 115 funciona sino aparece el exception
 		assert.equals(2, marvin.vidas())
 	}
 }
