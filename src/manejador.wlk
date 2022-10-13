@@ -14,20 +14,17 @@ object manejadorDeJuego{
 	game.ground("./assets/fondo/cielo.jpg") //borrar esto si no queres ver las celdas
  
  
-  	fondo.cargarFondo()
-  	globo.init()
+  	//fondo.cargarFondo()
+  	//globo.init()
   	marvin.init()
    	//cazador.init()
-	ataqueBombas.init()
-	ataqueAviones.init()
-	
-	game.onCollideDo(marvin, {element => element.colisionadoPor()
-
-								
-	})
+	//ataqueBombas.init()
+	//ataqueAviones.init()
 	//contadorKms.init()
-	aparacerMonedas.init()
-	aparecerVidas.init()
+	moneda.init()
+	corazon.init()
+	game.onCollideDo(marvin, {element => element.colisionadoPor()})
+	
 	}
 	
 	//que ahcer cuando finaliza el juego

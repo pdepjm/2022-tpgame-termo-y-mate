@@ -1,11 +1,11 @@
 import wollok.game.*
 import direcciones.*
-import extras.*
 import manejador.*
 
 
 object marvin {
 	var property position = game.at(1,4)
+	var property positionSig = position
 	var property estaVivo = true
 	var property image = "./assets/marvin/pajaro1.png"
 	
@@ -48,24 +48,18 @@ object marvin {
 			
 		})
 		}
-	//imagen en funcion del tiempo
 	
-    method moverse(direccion) {
-            position = direccion.siguientePosicion(position) } //agregar condicional de la posicion aca
+    method moverseA(direccion) {
+            	position = direccion.siguientePosicionMarvin(position)
             
-     
+     }
     method controles(){
-  
-    	
-    		keyboard.w().onPressDo {self.moverse(arriba)}
-    		keyboard.s().onPressDo {self.moverse(abajo)} 
-    	 
-    		keyboard.a().onPressDo {self.moverse(izquierda)}
-    		keyboard.d().onPressDo {self.moverse(derecha)}
+    		keyboard.w().onPressDo {self.moverseA(arriba)}
+    		keyboard.s().onPressDo {self.moverseA(abajo)} 
+    		keyboard.a().onPressDo {self.moverseA(izquierda)}
+    		keyboard.d().onPressDo {self.moverseA(derecha)}
     	//keyboard.space().onPressDo {self.subirMucho(
     	}
-    	
-    	
     	
     	
 	method init() {
@@ -80,59 +74,83 @@ object marvin {
 class Coleccionable {
 	
 	var property position = game.center()
-
-	method colisionadoPor()
+	var image
 	
-	// ESTA LA PODEMOS PONER EN EXTRAS CON RETURN
 	method spawnearRandom (limiteX, limiteY){  
-		const x = (limiteX.. game.width()-1).anyOne()
+		const x = (limiteX.. 5).anyOne() //hay que poner bien el limite que se va a poder mover marvin
 		const y = (limiteY.. game.height()-1).anyOne()
 		return game.at(x,y)} //position = game.at(x,y)
+		
+	method crear(){
+		
+		//if(game.hasVisual(self)){
+		//game.schedule(10000, {game.removeVisual(self)}) } //tiempo de espera para agarrar los poweUps
+		 	}	
 }
 
-class Moneda inherits Coleccionable {
-	const property puntosAdiciona=10 
+object moneda inherits Coleccionable (image = "./assets/powerup/moneda.png"){
 	
-	method image() = "./assets/powerup/moneda.png"
-	
-	override method colisionadoPor(){
-		marvin.sumarPuntos(self)
-		game.removeVisual(self)
-		monedero.remove(self)}  
-}
-
-object creadorDeMonedas {
-	const monedero =[]
-	method crearMonedas(){
-		const nuevaMoneda = new Moneda(position = self.spawnearRandom(0,0)) 
-		game.addVisual(nuevaMoneda)
-		monedero.add(nuevaMoneda) }
+	method colisionadoPor(){
+		//marvin.sumarPuntos(self) ver bien esto
+		game.removeVisual(self) }  
 	
 	method init(){
-	game.onTick(15000,"laboratorioMonedas",{self.crearMonedas()})}
+		game.addVisual(self) //no se por que no se crea
+		//game.onTick(5000,"laboratorioMonedas",{self.crear()})
+		}
 }
 
-class Corazon inherits Coleccionable {
-	const property vidasQueSuma = 1
-	const saludMarvin =[]
-	method image() = "./assets/powerup/corazon.png"
-	
-	override method colisionadoPor(){
-		marvin.sumarVidas(self)
-		game.removeVisual(self)
-		saludMarvin.remove(self)}
-}
 
-object aparecerVidas inherits Corazon{
+object corazon inherits Coleccionable (image = "./assets/powerup/corazon.png"){
 	
-	method crearVidas(){
-		const nuevaVida = new Corazon (position = self.spawnearRandom(0,0)) 
-		game.addVisual(nuevaVida)
-		saludMarvin.add(nuevaVida) }
-	
+	method colisionadoPor(){
+		//marvin.sumarVidas(self)
+		game.removeVisual(self) }  
+		
 	method init(){
-	game.onTick(15000,"laboratorioVidas",{self.crearVidas()})}
+		game.onTick(15000,"laboratorioCorazones",{self.crear()})
+	}
 }
+
+//class Moneda inherits Coleccionable {
+//	const property puntosAdiciona=10 
+//	
+//	method image() = "./assets/powerup/moneda.png"
+//	
+//	override 
+//}
+
+//object creadorDeMonedas {
+//	const monedero =[]
+//	method crearMonedas(){
+//		const nuevaMoneda = new Moneda(position = self.spawnearRandom(0,0)) 
+//		game.addVisual(nuevaMoneda)
+//		monedero.add(nuevaMoneda) }
+//	
+//	method init(){
+//	game.onTick(15000,"laboratorioMonedas",{self.crearMonedas()})}
+//}
+
+//class Corazon inherits Coleccionable {
+//	const property vidasQueSuma = 1
+//	const saludMarvin =[]
+//	method image() = "./assets/powerup/corazon.png"
+//	
+//	override method colisionadoPor(){
+//		marvin.sumarVidas(self)
+//		game.removeVisual(self)
+//		saludMarvin.remove(self)}
+//}
+//object crearVidas inherits Corazon{
+//	
+//	method crear(){
+//		const nuevaVida = new Corazon (position = self.spawnearRandom(0,0)) 
+//		game.addVisual(nuevaVida)
+//		saludMarvin.add(nuevaVida) }
+//	
+//	method init(){
+//	game.onTick(15000,"laboratorioVidas",{self.crearVidas()})}
+//}
 
 /* 
 object contadorKms{

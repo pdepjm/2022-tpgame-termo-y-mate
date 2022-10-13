@@ -1,6 +1,5 @@
 import wollok.game.*
 import direcciones.*
-import extras.*
 
 class Nube{
 	const resetPosition
@@ -25,7 +24,7 @@ object fondo {
   		game.addVisual(nube2)
   		game.addVisual(nube3)
   		//game.boardGround(cielo.jpg)
-		game.onTick(700,"laboratorioDeNubes",{nubes.forEach( {nebesita => if (funcionesExtra.posicionX(nebesita) != limiteNubeIzquierda)
+		game.onTick(400,"laboratorioDeNubes",{nubes.forEach( {nebesita => if (ubicacion.posicionX(nebesita) != limiteNubeIzquierda)
 			{movimientos.moverLeft(nebesita,2)} else {nebesita.volverADerecha()}            }         )     }     )
 }
 		method ola(){}		

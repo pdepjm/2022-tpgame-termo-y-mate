@@ -1,7 +1,6 @@
 import wollok.game.*
 import direcciones.*
 import marvin.*
-import extras.*
 
 class Enemigo {
 	var property position
@@ -41,7 +40,8 @@ object globo inherits Enemigo (position = game.at(12,6),image = "./assets/enemig
 		game.onTick(7000,"SpawnearGlobo",{
 			if(funcionesExtra.posicionY(self) != limiteGloboY)
 			{ 	
-				game.addVisual(self)
+				if(not(game.hasVisual(self)))
+					{game.addVisual(self)}
 				self.moverseEnDireccion(velocidadIzquierda, izquierda)
  				self.moverseEnDireccion(velocidadAbajo, abajo)
  				}
@@ -133,7 +133,7 @@ object cazador inherits Enemigo (
 
 
  // VER EL TEMA DE LAS LLAVES EN LA CLASE ENEMIGO Y AVION
-class Avion inherits Enemigo(position = game.center(),image = "./assets/enemigos/avion.png",velocidad){}
+class Avion inherits Enemigo(position = game.center(),image = "./assets/enemigos/avion.png"){}
 
 
 
@@ -143,7 +143,7 @@ object ataqueAviones inherits Avion (position = game.center()){
 	
 	method init(){
 		game.onTick(5000,"laboratorioAviones",{self.crearAvion()})
-		game.onTick(150,"dispararAviones",{aviones.forEach( {avion => if (funcionesExtra.posicionX(avion) != limiteCaidaAvionX) //hacer un objeto que hago esto ara todos
+		game.onTick(150,"dispararAviones",{aviones.forEach( {avion => if (ubicacion.posicionX(avion) != limiteCaidaAvionX) //hacer un objeto que hago esto ara todos
 			{movimientos.moverLeft(avion,1)} else {self.eliminarAvion(avion)}})})   }
 
 	method crearAvion(){
@@ -164,7 +164,7 @@ object ataqueBombas inherits Bomba (position = game.center()){
 	
 	method init(){
 		game.onTick(5000,"laboratorioBombas",{self.crearBomba()})
-		game.onTick(150,"dispararBombas",{bombas.forEach( {bombita => if (funcionesExtra.posicionY(bombita) != limiteCaidaBombaY)
+		game.onTick(150,"dispararBombas",{bombas.forEach( {bombita => if (ubicacion.posicionY(bombita) != limiteCaidaBombaY)
 			{movimientos.moverDown(bombita,1)} else {self.eliminarBomba(bombita)}})})   }
 	
 	method crearBomba(){
