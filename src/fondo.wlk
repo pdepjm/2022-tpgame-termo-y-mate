@@ -11,11 +11,11 @@ class Nube{
 		} // CERRAMOS LA CLASE NUBE
 	
 object fondo {	
-	const limiteNubeIzquierda = 1
+	const limiteNubeX = -1
 	
-	const nube1 = new Nube(resetPosition = game.at(13, 6), position = game.at(11, 5),image = "./assets/fondo/Cloud_1.png")
-	const nube2 = new Nube(resetPosition = game.at(13, 4), position = game.at(3, 3),image = "./assets/fondo/Cloud_2.png")
-	const nube3 = new Nube(resetPosition = game.at(13, 2), position = game.at(7, 1),image = "./assets/fondo/Cloud_2.png") 
+	const nube1 = new Nube(resetPosition = game.at(13, 5), position = game.at(11, 5),image = "./assets/fondo/Cloud_1.png")
+	const nube2 = new Nube(resetPosition = game.at(13, 3), position = game.at(3, 3),image = "./assets/fondo/Cloud_2.png")
+	const nube3 = new Nube(resetPosition = game.at(13, 1), position = game.at(8, 1),image = "./assets/fondo/Cloud_2.png") 
 	
 	const nubes = [nube1, nube2, nube3]
 	
@@ -24,8 +24,8 @@ object fondo {
   		game.addVisual(nube2)
   		game.addVisual(nube3)
   		//game.boardGround(cielo.jpg)
-		game.onTick(400,"laboratorioDeNubes",{nubes.forEach( {nebesita => if (ubicacion.posicionX(nebesita) != limiteNubeIzquierda)
-			{movimientos.moverLeft(nebesita,2)} else {nebesita.volverADerecha()}            }         )     }     )
+		game.onTick(200,"laboratorioDeNubes",{nubes.forEach( {nebesita => if (ubicacion.posicionX(nebesita) != limiteNubeX)
+			{movimientos.moverLeft(nebesita,1)} else {nebesita.volverADerecha()}            }         )     }     )
 }
-		method ola(){}		
+		
 } // CERRAMOS EL METODO CARGAR FONDO

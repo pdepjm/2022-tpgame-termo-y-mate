@@ -9,19 +9,19 @@ import direcciones.*
 describe "movimientos de Marvin" {
 	
 	test"Marvin se mueve para arriba"{
-		marvin.moverseA(arriba)
+		marvin.moverseA(arribaMarvin)
 		assert.equals(game.at(1, 5), marvin.position())
 	}
 	test"Marvin se mueve para abajo"{
-		marvin.moverseA(abajo)
+		marvin.moverseA(abajoMarvin)
 		assert.equals(game.at(1, 3), marvin.position())
 	}
 	test "Marvin se mueve para la derecha"{
-		marvin.moverseA(derecha)
+		marvin.moverseA(derechaMarvin)
 		assert.equals(game.at(2, 4), marvin.position())
 	}
 	test "Marvin se mueve para la izquierda"{
-		marvin.moverseA(izquierda)
+		marvin.moverseA(izquierdaMarvin)
 		assert.equals(game.at(0, 4), marvin.position())
 	}
 }

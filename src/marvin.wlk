@@ -11,11 +11,6 @@ object marvin {
 	
 	var property puntos = 0
 	var property vidas = 1
-	
-	const limiteFondoX = 12
-	const limiteFondoY = 6
-	
-	
 
 	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
 	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
@@ -50,14 +45,14 @@ object marvin {
 		}
 	
     method moverseA(direccion) {
-            	position = direccion.siguientePosicionMarvin(position)
+            	position = direccion.siguientePosicion(position)
             
      }
     method controles(){
-    		keyboard.w().onPressDo {self.moverseA(arriba)}
-    		keyboard.s().onPressDo {self.moverseA(abajo)} 
-    		keyboard.a().onPressDo {self.moverseA(izquierda)}
-    		keyboard.d().onPressDo {self.moverseA(derecha)}
+    		keyboard.w().onPressDo {self.moverseA(arribaMarvin)}
+    		keyboard.s().onPressDo {self.moverseA(abajoMarvin)} 
+    		keyboard.a().onPressDo {self.moverseA(izquierdaMarvin)}
+    		keyboard.d().onPressDo {self.moverseA(derechaMarvin)}
     	//keyboard.space().onPressDo {self.subirMucho(
     	}
     	
@@ -74,31 +69,30 @@ object marvin {
 class Coleccionable {
 	
 	var property position = game.center()
-	var image
+	var property image
 	
 	method spawnearRandom (limiteX, limiteY){  
-		const x = (limiteX.. 5).anyOne() //hay que poner bien el limite que se va a poder mover marvin
+		const x = (limiteX.. game.width()-1).anyOne() //hay que poner bien el limite que se va a poder mover marvin
 		const y = (limiteY.. game.height()-1).anyOne()
 		return game.at(x,y)} //position = game.at(x,y)
 		
-	method crear(){
-		
-		//if(game.hasVisual(self)){
-		//game.schedule(10000, {game.removeVisual(self)}) } //tiempo de espera para agarrar los poweUps
-		 	}	
+	method init (){
+		game.onTick(15000,"laboratorioDePowerUps", {
+		if(!game.hasVisual(self)){
+		game.addVisualIn(self, self.spawnearRandom(0,0)) 
+		}	
+		game.schedule(4000, {if(game.hasVisual(self)) game.removeVisual(self)})  //tiempo de espera para agarrar los poweUps
+		 	}	)
 }
-
+}
 object moneda inherits Coleccionable (image = "./assets/powerup/moneda.png"){
 	
 	method colisionadoPor(){
 		//marvin.sumarPuntos(self) ver bien esto
-		game.removeVisual(self) }  
-	
-	method init(){
-		game.addVisual(self) //no se por que no se crea
-		//game.onTick(5000,"laboratorioMonedas",{self.crear()})
-		}
-}
+		game.removeVisual(self) 
+		}  
+	}
+
 
 
 object corazon inherits Coleccionable (image = "./assets/powerup/corazon.png"){
@@ -107,9 +101,6 @@ object corazon inherits Coleccionable (image = "./assets/powerup/corazon.png"){
 		//marvin.sumarVidas(self)
 		game.removeVisual(self) }  
 		
-	method init(){
-		game.onTick(15000,"laboratorioCorazones",{self.crear()})
-	}
 }
 
 //class Moneda inherits Coleccionable {

@@ -14,12 +14,12 @@ object manejadorDeJuego{
 	game.ground("./assets/fondo/cielo.jpg") //borrar esto si no queres ver las celdas
  
  
-  	//fondo.cargarFondo()
-  	//globo.init()
+  	fondo.cargarFondo()
+  	globo.init()
   	marvin.init()
    	//cazador.init()
-	//ataqueBombas.init()
-	//ataqueAviones.init()
+	bomba.init()
+	avion.init()
 	//contadorKms.init()
 	moneda.init()
 	corazon.init()

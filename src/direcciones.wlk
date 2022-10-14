@@ -7,27 +7,18 @@ object ubicacion{
 	method posicionX(unObjeto) = unObjeto.position().x() //ponerla en direcciones o no ponerla en un objeto
 	}
 	
-object arriba {
-    method siguientePosicion(pos) = pos.up(1)
-    method siguientePosicionMarvin(pos) = if(ubicacion.posicionY(marvin) != game.height() -1) pos.up(1) else pos.up(0)
-    
-    //method siguientePosicion(pos, cant) = pos.up(cant)
+//solo para marvin
+object arribaMarvin {
+    method siguientePosicion(pos) = if(ubicacion.posicionY(marvin) != game.height() -1) pos.up(1) else pos.up(0)
 }
-object derecha {
-    method siguientePosicion(pos) = pos.right(1)
-    method siguientePosicionMarvin(pos) = if(ubicacion.posicionX(marvin) != game.width() -1) pos.right(1) else pos.right(0)
-    //method siguientePosicion(pos, cant) = pos.right(cant)
+object derechaMarvin {
+    method siguientePosicion(pos) = if(ubicacion.posicionX(marvin) != game.width() -1) pos.right(1) else pos.right(0)
 }
-object abajo {
-    method siguientePosicion(pos) = pos.down(1)
-    method siguientePosicionMarvin(pos) = if(ubicacion.posicionY(marvin) != game.height() - 7) pos.down(1) else pos.down(0)
-    //method siguientePosicion(pos, cant) = pos.down(cant)
+object abajoMarvin {
+    method siguientePosicion(pos) = if(ubicacion.posicionY(marvin) != game.height() - 7) pos.down(1) else pos.down(0)
 }
-object izquierda {
-    method siguientePosicion(pos) = pos.left(1)
-    method siguientePosicionMarvin(pos) = if(ubicacion.posicionX(marvin) != game.width() -13) pos.left(1) else pos.left(0)
-    
-    //method siguientePosicion(pos, cant) = pos.left(cant) 
+object izquierdaMarvin {
+    method siguientePosicion(pos) = if(ubicacion.posicionX(marvin) != game.width() -13) pos.left(1) else pos.left(0)
 }
 
 object movimientos {
