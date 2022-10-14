@@ -21,13 +21,13 @@ class Enemigo {
 		const y = (valorSpawneoRandomY.. game.height()-1).anyOne()
 		return game.at(x,y) }
 		
-	method fueraDelMapa (objeto) = ubicacion.posicionY(objeto) != limiteFondoY and ubicacion.posicionX(objeto) != limiteFondoX //dice si el objeto esta fuera del mapa o no
+	method dentroDelMapa (objeto) = ubicacion.posicionY(objeto) != limiteFondoY and ubicacion.posicionX(objeto) != limiteFondoX //dice si el objeto esta dentro del mapa o no
 
 	method lanzarEnemigo(frecuenciaSpawneo, velocidad, valorUp, valorDown, valorLeft, valorRight)//funcion generica para todos los enemigos, poner 0 en la direccion que no se va a mover
 		{ 
 		game.onTick(frecuenciaSpawneo,"laboratorioEnemigos",{self.crearEnemigoPosRandom(image)})
 		game.onTick(velocidad,"dispararEnemigo",{listaEnemigos.forEach( {enemigo => 
-			if (self.fueraDelMapa(enemigo)) 
+			if (self.dentroDelMapa(enemigo)) 
 			{	movimientos.moverUp(enemigo, valorUp)
 				movimientos.moverDown(enemigo, valorDown)
 				movimientos.moverLeft(enemigo, valorLeft) 
@@ -89,21 +89,19 @@ object bomba inherits Enemigo(position = game.center(), image = "./assets/enemig
 
 
 object cazador inherits Enemigo (
-	position = game.at(11,1), image = "./assets/enemigos/JK_P_Gun__Attack_000.png", valorSpawneoRandomX = 8, valorSpawneoRandomY = 0){
+	position = game.at(11,1), image = "./assets/enemigos/JK_P_Gun__Attack_000.png", valorSpawneoRandomX = 9, valorSpawneoRandomY = 0){
 		
-	const bala1 = new Bala(image = "./assets/enemigos/bala1.png", vIzq = 100, vA = 200)
-	const bala2 = new Bala(image = "./assets/enemigos/bala2.png", vIzq = 100, vA = 250)
-	const bala3 = new Bala(image = "./assets/enemigos/bala3.png", vIzq = 100, vA = 400)
-	const bala4 = new Bala(image = "./assets/enemigos/bala4.png", vIzq = 100, vA = 300) 
+	const bala1 = new Bala(image = "./assets/enemigos/bala1.png", valorUp = 1, valorLeft = 2)
+	const bala2 = new Bala(image = "./assets/enemigos/bala2.png", valorUp = 2, valorLeft = 1)
+	const bala3 = new Bala(image = "./assets/enemigos/bala3.png", valorUp = 2, valorLeft = 2)
+	const bala4 = new Bala(image = "./assets/enemigos/bala4.png", valorUp = 1, valorLeft = 3) 
 	
 	const balas = [bala1,bala2,bala3,bala4]	//si se ponen todas las balas aca, tira muchas
 		
 	method spawnearYDisparar(){
-		self.spawnearRandom()
-		game.schedule(100, {game.addVisual(self)})
 		game.schedule(200, {self.image("./assets/enemigos/JK_P_Gun__Attack_001.png")})
 		game.schedule(300, {self.image("./assets/enemigos/JK_P_Gun__Attack_002.png")})
-		game.schedule(400, {balas.forEach({bala => bala.init()})}) // on tick y random
+		game.schedule(400, {balas.forEach({bala => bala.lanzarBala()})}) // on tick y random
 		game.schedule(500, {self.image("./assets/enemigos/JK_P_Gun__Attack_003.png")})
 		game.schedule(600, {self.image("./assets/enemigos/JK_P_Gun__Attack_005.png")})
 		game.schedule(700, {self.image("./assets/enemigos/JK_P_Gun__Attack_007.png")})
@@ -118,36 +116,46 @@ object cazador inherits Enemigo (
 			balas.add{bala3}}
 		else balas.add{bala4}	}*/
 		
-	method init(){
-			game.onTick(10000,"CazadorAparece",{self.spawnearYDisparar()}) }
+	//method init(){
+	//		game.onTick(10000,"CazadorAparece",{self.spawnearYDisparar()}) }
+		
+	method init (){
+		game.onTick(15000,"spawnCazador", {
+		if(!game.hasVisual(self)){
+		game.addVisualIn(self, self.spawnearRandom()) 
+		self.spawnearYDisparar()
+		}	} ) }
+		 	
+	override method spawnearRandom (){
+		const x = (valorSpawneoRandomX.. game.width()-1).anyOne()
+		const y = 0
+		return game.at(x,y) }		
 }
 
-//hay medio un bug que la bala va aumentando exponencialmente la velocidad
-class Bala inherits Enemigo(position = cazador.position(),image = "bala1.png", valorSpawneoRandomX = 0, valorSpawneoRandomY = 0){
-	var contador = 0
-	var vIzq //velocidad hacia izquierda
-	var vA //velocidad hacia arriba
+
+class Bala inherits Enemigo(position = cazador.position(), image = "bala1.png", valorSpawneoRandomX = 0, valorSpawneoRandomY = 0){
+	var velocidad = 200
+	var valorUp
+	var valorLeft
+	method crearBala(){
+		game.addVisual(self)
+		}	
+	method eliminarBala(){
+			if(game.hasVisual(self))
+			game.removeVisual(self)
+		}	
+	method lanzarBala() {
+			self.crearBala()
+			game.onTick(velocidad,"dispararBala",{
+			if (self.dentroDelMapa(self)) 
+			{	movimientos.moverUp(self, valorUp)
+				movimientos.moverLeft(self, valorLeft) 
+			}
+			else {self.eliminarBala()}
+			 } )  }
+}
+
 	
-	/* 
-	method colisionadoPor(){
-		marvin.muerte()
-	}
-	method moverseA(direccion_){
-		position = direccion_.siguientePosicion(position)
-	}*/
-//	method moverseEnDireccion(){
-//		game.onTick(vIzq, "EnemigoMoviendose1", {self.moverseA(izquierda) })
-//		game.onTick(vA, "EnemigoMoviendose2", {self.moverseA(arriba)})
-//	}
-	
-	method init(){
-		if(contador == 0){
-			game.addVisual(self)
-		}
-		position = cazador.position()
-		//self.moverseEnDireccion()
-		contador += 1  }
-}		
 	
 
 
