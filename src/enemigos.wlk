@@ -90,15 +90,12 @@ object bomba inherits Enemigo(position = game.center(), image = "./assets/enemig
 
 object cazador inherits Enemigo (
 	position = game.at(11,1), image = "./assets/enemigos/JK_P_Gun__Attack_000.png", valorSpawneoRandomX = 9, valorSpawneoRandomY = 0){
-		
-	const bala1 = new Bala(image = "./assets/enemigos/bala1.png", valorUp = 1, valorLeft = 2)
+	const bala1 = new Bala(image = "./assets/enemigos/bala1.png", valorUp = 1, valorLeft = 1)
 	const bala2 = new Bala(image = "./assets/enemigos/bala2.png", valorUp = 2, valorLeft = 1)
-	const bala3 = new Bala(image = "./assets/enemigos/bala3.png", valorUp = 2, valorLeft = 2)
-	const bala4 = new Bala(image = "./assets/enemigos/bala4.png", valorUp = 1, valorLeft = 3) 
-	
-	const balas = [bala1,bala2,bala3,bala4]	//si se ponen todas las balas aca, tira muchas
-		
+	const bala3 = new Bala(image = "./assets/enemigos/bala3.png", valorUp = 1, valorLeft = 2)
+	const balas = [bala1,bala2,bala3]	
 	method spawnearYDisparar(){
+		game.addVisualIn(self, self.spawnearRandom())
 		game.schedule(200, {self.image("./assets/enemigos/JK_P_Gun__Attack_001.png")})
 		game.schedule(300, {self.image("./assets/enemigos/JK_P_Gun__Attack_002.png")})
 		game.schedule(400, {balas.forEach({bala => bala.lanzarBala()})}) // on tick y random
@@ -107,7 +104,6 @@ object cazador inherits Enemigo (
 		game.schedule(700, {self.image("./assets/enemigos/JK_P_Gun__Attack_007.png")})
 		game.schedule(900, {self.image("./assets/enemigos/JK_P_Gun__Attack_009.png")})
 		game.schedule(1500, {self.deSpawnear()})
-		 //tener un contador de balas vivas
 	}
 	/*method subirDificultad(){ //ver como hacer para que ande bien esto, si pongo todas las balas en la lista anda
 		if(balas.size() == 1){
@@ -120,10 +116,17 @@ object cazador inherits Enemigo (
 	//		game.onTick(10000,"CazadorAparece",{self.spawnearYDisparar()}) }
 		
 	method init (){
-		game.onTick(15000,"spawnCazador", {
+		game.onTick(10000,"spawnCazador", {
 		if(!game.hasVisual(self)){
-		game.addVisualIn(self, self.spawnearRandom()) 
-		self.spawnearYDisparar()
+			game.addVisualIn(self, self.spawnearRandom())
+		game.schedule(200, {self.image("./assets/enemigos/JK_P_Gun__Attack_001.png")})
+		game.schedule(300, {self.image("./assets/enemigos/JK_P_Gun__Attack_002.png")})
+		game.schedule(400, {balas.forEach({bala => bala.lanzarBala()})}) // on tick y random
+		game.schedule(500, {self.image("./assets/enemigos/JK_P_Gun__Attack_003.png")})
+		game.schedule(600, {self.image("./assets/enemigos/JK_P_Gun__Attack_005.png")})
+		game.schedule(700, {self.image("./assets/enemigos/JK_P_Gun__Attack_007.png")})
+		game.schedule(900, {self.image("./assets/enemigos/JK_P_Gun__Attack_009.png")})
+		game.schedule(1500, {self.deSpawnear()})
 		}	} ) }
 		 	
 	override method spawnearRandom (){
@@ -134,28 +137,37 @@ object cazador inherits Enemigo (
 
 
 class Bala inherits Enemigo(position = cazador.position(), image = "bala1.png", valorSpawneoRandomX = 0, valorSpawneoRandomY = 0){
-	var velocidad = 200
+	const velocidad = 500
 	var valorUp
 	var valorLeft
-	method crearBala(){
-		game.addVisual(self)
-		}	
+	
 	method eliminarBala(){
 			if(game.hasVisual(self))
 			game.removeVisual(self)
 		}	
 	method lanzarBala() {
-			self.crearBala()
+			if(!game.hasVisual(self))
+			{game.addVisual(self)}
 			game.onTick(velocidad,"dispararBala",{
 			if (self.dentroDelMapa(self)) 
 			{	movimientos.moverUp(self, valorUp)
 				movimientos.moverLeft(self, valorLeft) 
 			}
-			else {self.eliminarBala()}
+			else {game.removeTickEvent("dispararBala") self.eliminarBala() }
 			 } )  }
+	method resetPosition(){
+		self.position(cazador.position())
+	}
+	
 }
 
+object lanzarBalas {
 	
+	
+	method init()
+	{}
+	
+}
 	
 
 
