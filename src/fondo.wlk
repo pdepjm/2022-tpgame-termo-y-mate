@@ -1,6 +1,7 @@
 import wollok.game.*
 import direcciones.*
 
+
 class Nube{
 	const resetPosition
 	var property position
@@ -24,8 +25,8 @@ object fondo {
   		game.addVisual(nube2)
   		game.addVisual(nube3)
   		//game.boardGround(cielo.jpg)
-		game.onTick(200,"laboratorioDeNubes",{nubes.forEach( {nebesita => if (ubicacion.posicionX(nebesita) != limiteNubeX)
-			{movimientos.moverLeft(nebesita,1)} else {nebesita.volverADerecha()}            }         )     }     )
+		game.onTick(170,"laboratorioDeNubes",{nubes.forEach( {nubesita => if (ubicacion.posicionX(nubesita) != limiteNubeX)
+			{movimientos.moverLeft(nubesita,1)} else {nubesita.volverADerecha()}            }         )     }     )
 }
 		
 } // CERRAMOS EL METODO CARGAR FONDO

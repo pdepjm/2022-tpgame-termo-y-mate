@@ -40,14 +40,13 @@ object marvin {
 		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaro3.png")})
 		game.schedule(600, {self.actualizarImagen("./assets/marvin/pajaro4.png")})
 		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})
-			
 		})
 		}
 	
     method moverseA(direccion) {
             	position = direccion.siguientePosicion(position)
-            
      }
+     
     method controles(){
     		keyboard.w().onPressDo {self.moverseA(arribaMarvin)}
     		keyboard.s().onPressDo {self.moverseA(abajoMarvin)} 
@@ -72,21 +71,23 @@ class Coleccionable {
 	var property image
 	
 	method spawnearRandom (limiteX, limiteY){  
-		const x = (limiteX.. game.width()-1).anyOne() //hay que poner bien el limite que se va a poder mover marvin
+		const x = (limiteX.. limiteDerechoMarvin).anyOne() 
 		const y = (limiteY.. game.height()-1).anyOne()
 		return game.at(x,y)} //position = game.at(x,y)
 		
-	method init (){
-		game.onTick(15000,"laboratorioDePowerUps", {
+	method spawnearColeccionable (frecuenciaSpawneo){
+		game.onTick(frecuenciaSpawneo,"laboratorioDePowerUps", {
 		if(!game.hasVisual(self)){
 		game.addVisualIn(self, self.spawnearRandom(0,0)) 
 		}	
-		game.schedule(4000, {if(game.hasVisual(self)) game.removeVisual(self)})  //tiempo de espera para agarrar los poweUps
+		game.schedule(3500, {if(game.hasVisual(self)) game.removeVisual(self)})  //tiempo de espera para agarrar los poweUps
 		 	}	)
 }
 }
 object moneda inherits Coleccionable (image = "./assets/powerup/moneda.png"){
-	
+	method init(){
+		self.spawnearColeccionable(20000)
+	}
 	method colisionadoPor(){
 		//marvin.sumarPuntos(self) ver bien esto
 		game.removeVisual(self) 
@@ -97,6 +98,9 @@ object moneda inherits Coleccionable (image = "./assets/powerup/moneda.png"){
 
 object corazon inherits Coleccionable (image = "./assets/powerup/corazon.png"){
 	
+	method init(){
+		self.spawnearColeccionable(55000) //mientras no supere el maximo de vidas permitido (falta eso)
+	}
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)
 		game.removeVisual(self) }  
