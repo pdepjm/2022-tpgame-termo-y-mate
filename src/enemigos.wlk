@@ -51,7 +51,7 @@ class Enemigo {
 	}	
 }
 
-object globo inherits Enemigo (position = game.at(5,6),image = "./assets/enemigos/HotAirBalloon_2.png", valorSpawneoRandomX = 10, valorSpawneoRandomY = 6 ){
+object globo inherits Enemigo (position = game.at(5,6),image = "HotAirBalloon_2.png", valorSpawneoRandomX = 10, valorSpawneoRandomY = 6 ){
  	const frecuenciaSpawneo = 22000
  	var velocidad = 400
 	method init(){
@@ -75,7 +75,7 @@ object globo inherits Enemigo (position = game.at(5,6),image = "./assets/enemigo
 
  }
 
-object avion inherits Enemigo (position = game.center(), image = "./assets/enemigos/avion.png", valorSpawneoRandomX = 12, valorSpawneoRandomY = 0){
+object avion inherits Enemigo (position = game.center(), image = "avion.png", valorSpawneoRandomX = 12, valorSpawneoRandomY = 0){
 	const frecuenciaSpawneo = 10000
  	var velocidad = 150
 	method init(){
@@ -83,7 +83,7 @@ object avion inherits Enemigo (position = game.center(), image = "./assets/enemi
 	}
 }
 
-object bomba inherits Enemigo(position = game.center(), image = "./assets/enemigos/bomba.png", valorSpawneoRandomX = 0, valorSpawneoRandomY = 6){
+object bomba inherits Enemigo(position = game.center(), image = "bomba.png", valorSpawneoRandomX = 0, valorSpawneoRandomY = 6){
 	const frecuenciaSpawneo = 17000
 	var tiempoEnCaer = 3000
  	var velocidad = 250
@@ -98,17 +98,17 @@ object bomba inherits Enemigo(position = game.center(), image = "./assets/enemig
 }
 	
 	
-object cazador inherits Enemigo (position = game.at(11,0), image = "./assets/enemigos/JK_P_Gun__Attack_000.png", valorSpawneoRandomX = 9, valorSpawneoRandomY = 0)
+object cazador inherits Enemigo (position = game.at(11,0), image = "JK_P_Gun__Attack_000.png", valorSpawneoRandomX = 9, valorSpawneoRandomY = 0)
 	{
 	const frecuenciaSpawneo = 30000
 	method spawnearYDisparar(){
-		game.schedule(200, {self.image("./assets/enemigos/JK_P_Gun__Attack_001.png")})
-		game.schedule(300, {self.image("./assets/enemigos/JK_P_Gun__Attack_002.png")})
+		game.schedule(200, {self.image("JK_P_Gun__Attack_001.png")})
+		game.schedule(300, {self.image("JK_P_Gun__Attack_002.png")})
 		game.schedule(400, {lanzadorDeBalas.lanzarBala()}) 
-		game.schedule(500, {self.image("./assets/enemigos/JK_P_Gun__Attack_003.png")})
-		game.schedule(600, {self.image("./assets/enemigos/JK_P_Gun__Attack_005.png")})
-		game.schedule(700, {self.image("./assets/enemigos/JK_P_Gun__Attack_007.png")})
-		game.schedule(900, {self.image("./assets/enemigos/JK_P_Gun__Attack_009.png")})
+		game.schedule(500, {self.image("JK_P_Gun__Attack_003.png")})
+		game.schedule(600, {self.image("JK_P_Gun__Attack_005.png")})
+		game.schedule(700, {self.image("JK_P_Gun__Attack_007.png")})
+		game.schedule(900, {self.image("JK_P_Gun__Attack_009.png")})
 		game.schedule(1500, {self.deSpawnear()})
 		}
 
@@ -161,16 +161,16 @@ object lanzadorDeBalas inherits Enemigo (position = game.center(), image = "", v
 	method crearBalas(cant){
 		if(cant == 3)
 		{
-			self.crearBala("./assets/enemigos/bala1.png")
-			self.crearBala("./assets/enemigos/bala2.png")
-			self.crearBala("./assets/enemigos/bala3.png")		//probe con times y no se como hacer para que ande bien //2.times({self.crearBala()})
+			self.crearBala("bala1.png")
+			self.crearBala("bala2.png")
+			self.crearBala("bala3.png")		//probe con times y no se como hacer para que ande bien //2.times({self.crearBala()})
 		}
 		if (cant == 2) {
-			self.crearBala("./assets/enemigos/bala1.png")
-			self.crearBala("./assets/enemigos/bala2.png")
+			self.crearBala("bala1.png")
+			self.crearBala("bala2.png")
 		}
 		else {
-			self.crearBala("./assets/enemigos/bala1.png")
+			self.crearBala("bala1.png")
 		}
 	}
 	method crearBala(imagen){

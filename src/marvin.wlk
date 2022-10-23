@@ -7,7 +7,7 @@ object marvin {
 	var property position = game.at(1,4)
 	var property positionSig = position
 	var property estaVivo = true
-	var property image = "./assets/marvin/pajaro1.png"
+	var property image = "pajaro1.png"
 	
 	var property puntos = 0
 	var property vidas = 1
@@ -20,11 +20,11 @@ object marvin {
 		image = imagen }
 		
 	method muerte() {
-		self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")
-		game.schedule(100, {self.actualizarImagen("./assets/marvin/pajaroMuerto1.png")})
-		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaroMuerto2.png")})
-		game.schedule(300, {self.actualizarImagen("./assets/marvin/pajaroMuerto3.png")})
-		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaroMuerto4.png")})
+		self.actualizarImagen("pajaroMuerto4.png")
+		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
+		game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
+		game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
+		game.schedule(400, {self.actualizarImagen("pajaroMuerto4.png")})
 		//game.removeVisual(self)
 		
 		//manejadorDeJuego.juegoFinalizado()
@@ -36,10 +36,10 @@ object marvin {
 
 	method volar(){
 		game.onTick(1000, "Volar",{
-		game.schedule(200, {self.actualizarImagen("./assets/marvin/pajaro2.png")})
-		game.schedule(400, {self.actualizarImagen("./assets/marvin/pajaro3.png")})
-		game.schedule(600, {self.actualizarImagen("./assets/marvin/pajaro4.png")})
-		game.schedule(800, {self.actualizarImagen("./assets/marvin/pajaro1.png")})
+		game.schedule(200, {self.actualizarImagen("pajaro2.png")})
+		game.schedule(400, {self.actualizarImagen("pajaro3.png")})
+		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
+		game.schedule(800, {self.actualizarImagen("pajaro1.png")})
 		})
 		}
 	
@@ -84,7 +84,7 @@ class Coleccionable {
 		 	}	)
 }
 }
-object moneda inherits Coleccionable (image = "./assets/powerup/moneda.png"){
+object moneda inherits Coleccionable (image = "moneda.png"){
 	method init(){
 		self.spawnearColeccionable(20000)
 	}
@@ -96,7 +96,7 @@ object moneda inherits Coleccionable (image = "./assets/powerup/moneda.png"){
 
 
 
-object corazon inherits Coleccionable (image = "./assets/powerup/corazon.png"){
+object corazon inherits Coleccionable (image = "corazon.png"){
 	
 	method init(){
 		self.spawnearColeccionable(55000) //mientras no supere el maximo de vidas permitido (falta eso)
