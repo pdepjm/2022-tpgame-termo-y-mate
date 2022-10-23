@@ -16,15 +16,16 @@ object manejadorDeJuego{
 		//game.addVisual(botonPlay)
 		
 		//TEXTO
-		game.addVisual(texto)
+		game.addVisual(botonPlay)
 		
 		//INICIO JUEGO
 		keyboard.space().onPressDo{self.transicion()}
 	}
 	
 	method transicion(){
-		game.removeVisual(texto)
-		self.iniciarJuego()
+		botonPlay.cambiarImagen()
+		game.schedule(200,{game.removeVisual(botonPlay)})
+		game.schedule(200,{self.iniciarJuego()})
 	}
 	
 	method iniciarJuego(){

@@ -37,3 +37,12 @@ object texto {
 	method text() = "presione SPACE para iniciar el juego"
 	method textColor() = "000000"
 }
+
+object botonPlay {
+	const property position = game.center()
+	var property image = "botonPlay.png"
+	
+	method cambiarImagen() {
+		image = "botonPlay2.png"
+	}
+}
