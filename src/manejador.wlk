@@ -16,7 +16,7 @@ object manejadorDeJuego{
 		//game.addVisual(botonPlay)
 		
 		//TEXTO
-		game.addVisual(botonPlay)
+		game.addVisual(botonPlay) //creo que Ami se olvido de subir la iamgen, apretar espacio para empezar
 		
 		//INICIO JUEGO
 		keyboard.space().onPressDo{self.transicion()}
@@ -33,11 +33,12 @@ object manejadorDeJuego{
 	game.ground("cielo2.png") //borrar esto si no queres ver las celdas
  
   	fondo.cargarFondo()
-  	globo.init()
+  	//globo.init()
   	marvin.init()
    	cazador.init()
 	bomba.init()
-	avion.init()
+	aereosHorizontal.init()
+	aereosDiagonal.init()
 	//contadorKms.init()
 	moneda.init()
 	corazon.init()

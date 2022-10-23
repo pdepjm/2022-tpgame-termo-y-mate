@@ -14,17 +14,13 @@ object marvin {
 
 	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
 	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
-	
 
-	method actualizarImagen(imagen) {
-		image = imagen }
-		
 	method muerte() {
-		self.actualizarImagen("pajaroMuerto4.png")
-		game.schedule(100, {self.actualizarImagen("pajaroMuerto1.png")})
-		game.schedule(200, {self.actualizarImagen("pajaroMuerto2.png")})
-		game.schedule(300, {self.actualizarImagen("pajaroMuerto3.png")})
-		game.schedule(400, {self.actualizarImagen("pajaroMuerto4.png")})
+		//self.actualizarImagen("pajaroMuerto4.png")
+		game.schedule(100, {self.image("pajaroMuerto1.png")})
+		game.schedule(200, {self.image("pajaroMuerto2.png")})
+		game.schedule(300, {self.image("pajaroMuerto3.png")})
+		game.schedule(400, {self.image("pajaroMuerto4.png")})
 		//game.removeVisual(self)
 		
 		//manejadorDeJuego.juegoFinalizado()
@@ -36,10 +32,10 @@ object marvin {
 
 	method volar(){
 		game.onTick(1000, "Volar",{
-		game.schedule(200, {self.actualizarImagen("pajaro2.png")})
-		game.schedule(400, {self.actualizarImagen("pajaro3.png")})
-		game.schedule(600, {self.actualizarImagen("pajaro4.png")})
-		game.schedule(800, {self.actualizarImagen("pajaro1.png")})
+		game.schedule(200, {self.image("pajaro2.png")})
+		game.schedule(400, {self.image("pajaro3.png")})
+		game.schedule(600, {self.image("pajaro4.png")})
+		game.schedule(800, {self.image("pajaro1.png")})
 		})
 		}
 	
@@ -84,9 +80,22 @@ class Coleccionable {
 		 	}	)
 }
 }
-object moneda inherits Coleccionable (image = "moneda.png"){
+object moneda inherits Coleccionable (image = "pieniąszka 01.gif"){
 	method init(){
-		self.spawnearColeccionable(20000)
+		self.spawnearColeccionable(10000)
+		self.girar()
+	}
+	method girar(){
+		game.onTick(900, "girarMoneda", {	
+			game.schedule(100, {self.image("moneda 1.png")})
+			game.schedule(200, {self.image("moneda 2.png")})
+			game.schedule(300, {self.image("moneda 3.png")})
+			game.schedule(400, {self.image("moneda 4.png")})
+			game.schedule(500, {self.image("moneda 5.png")})
+			game.schedule(600, {self.image("moneda 6.png")})
+			game.schedule(700, {self.image("moneda 7.png")})
+			game.schedule(800, {self.image("moneda 8.png")})})
+	
 	}
 	method colisionadoPor(){
 		//marvin.sumarPuntos(self) ver bien esto
@@ -99,7 +108,7 @@ object moneda inherits Coleccionable (image = "moneda.png"){
 object corazon inherits Coleccionable (image = "corazon.png"){
 	
 	method init(){
-		self.spawnearColeccionable(55000) //mientras no supere el maximo de vidas permitido (falta eso)
+		self.spawnearColeccionable(50000) //mientras no supere el maximo de vidas permitido (falta eso)
 	}
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)

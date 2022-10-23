@@ -24,7 +24,7 @@ object fondo {
   		game.addVisual(nube1)
   		game.addVisual(nube2)
   		game.addVisual(nube3)
-  		//game.boardGround(cielo.jpg)
+  		//game.boardGround("cielo.jpg")
 		game.onTick(170,"laboratorioDeNubes",{nubes.forEach( {nubesita => if (ubicacion.posicionX(nubesita) != limiteNubeX)
 			{movimientos.moverLeft(nubesita,1)} else {nubesita.volverADerecha()}            }         )     }     )
 }
