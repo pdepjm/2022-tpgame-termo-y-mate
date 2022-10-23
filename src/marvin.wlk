@@ -156,6 +156,22 @@ object corazon inherits Coleccionable (image = "corazon.png"){
 //	game.onTick(15000,"laboratorioVidas",{self.crearVidas()})}
 //}
 
+
+object score{
+	var property position = game.at(12,6)
+	var contadorKms = 0
+	var property image = "score.png"
+	method text() = contadorKms.toString()
+	method textColor() = "ffff00ff"
+	method init(){
+		game.addVisual(self)
+		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
+		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}}
+		
+object scoreImage{
+	var property position = game.at(11,6)
+	var property image = "score.png"
+}
 /* 
 object contadorKms{
 	var property position = game.at(12,0)

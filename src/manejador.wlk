@@ -29,17 +29,17 @@ object manejadorDeJuego{
 	}
 	
 	method iniciarJuego(){
-	//game.showAttributes(marvin)		
-	game.ground("cielo2.png") //borrar esto si no queres ver las celdas
+	//game.showAttributes(marvin)
+			
+	game.ground("cielo.png") //borrar esto si no queres ver las celdas
  
   	fondo.cargarFondo()
-  	//globo.init()
   	marvin.init()
    	cazador.init()
 	bomba.init()
 	aereosHorizontal.init()
 	aereosDiagonal.init()
-	//contadorKms.init()
+	score.init()
 	moneda.init()
 	corazon.init()
 	game.onCollideDo(marvin, {element => element.colisionadoPor()})
