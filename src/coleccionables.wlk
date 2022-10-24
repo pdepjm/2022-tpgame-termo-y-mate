@@ -57,6 +57,7 @@ object corazon inherits Coleccionable (image = "corazon.png"){
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)
 		game.removeVisual(self)
-		saludMarvin.sumarVidas(self)  }  		
+		saludMarvin.sumarVidas(self)  }  
+			
 }
 

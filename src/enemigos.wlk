@@ -1,6 +1,8 @@
 import wollok.game.*
 import direcciones.*
 import marvin.*
+import coleccionables.*
+import manejador.*
 
 const limiteDESPAWNFondoX = -1 //posicion en X en la que el objeto va a desaaparecer
 const limiteDESPAWNFondoY = -1 //posicion en Y en la que el objeto va a desaaparecer
@@ -18,7 +20,8 @@ class Enemigo {
 	const listaEnemigos = #{}
 	
 	method colisionadoPor(){
-		marvin.muerte() }
+		if(saludMarvin.vidas() == 1) {marvin.muerte()} else {saludMarvin.restarVidas()}
+		}
 
 	method deSpawnear(){
 		game.removeVisual(self) }
@@ -42,8 +45,7 @@ class Enemigo {
 	method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = imagen, position = self.spawnearRandom())
 		game.addVisual(nuevoEnemigo)
-		listaEnemigos.add(nuevoEnemigo)
-	}
+		listaEnemigos.add(nuevoEnemigo) }
 		
 	method spawnearRandom (){ 
 		const x = (valorSpawneoRandomXI.. valorSpawneoRandomXF).anyOne()

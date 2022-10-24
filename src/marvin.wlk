@@ -22,6 +22,7 @@ object marvin {
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
 		game.schedule(400, {self.image("pajaroMuerto4.png")})
 		//game.removeVisual(self)
+		
 		manejadorDeJuego.juegoFinalizado()
 		
 		//game.schedule(1000,{game.addVisual(fin)})
