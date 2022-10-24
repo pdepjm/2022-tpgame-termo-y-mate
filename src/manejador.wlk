@@ -104,10 +104,13 @@ object monedero{
 
 object saludMarvin{
 	var property position = game.at(11,6)
-	var property vidas = 2
+	var property vidas = 1
 	var property image = "score.png"
 	
-	method sumarVidas(unCorazon){vidas += unCorazon.vidasQueSuma()}
+	method sumarVidas(unCorazon){
+		if (vidas == 3 ) {} else {vidas += unCorazon.vidasQueSuma()}
+	}
+	
 	method restarVidas(){vidas -= 1}
 	
 	method text() = vidas.toString()
