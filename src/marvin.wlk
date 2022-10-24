@@ -7,7 +7,7 @@ object marvin {
 	var property position = game.at(1,4)
 	var property positionSig = position
 	var property estaVivo = true
-	var property image = "pajaro1.png"
+	var property image = "pajaro1.jpg"
 	
 	var property puntos = 0
 	var property vidas = 1
@@ -168,10 +168,10 @@ object score{
 		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
 		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}}
 		
-object scoreImage{
-	var property position = game.at(11,6)
-	var property image = "score.png"
-}
+//object scoreImage{
+//	var property position = game.at(11,6)
+//	var property image = "score.png"
+//}
 /* 
 object contadorKms{
 	var property position = game.at(12,0)

@@ -1,7 +1,7 @@
 import wollok.game.*
 import marvin.*
 
-const limiteArribaMarvin = 11
+const limiteArribaMarvin = game.height() -1
 const limiteAbajoMarvin = 0
 const limiteDerechoMarvin = 4
 const limiteIzquierdoMarvin = 0

@@ -10,11 +10,13 @@ const limitePantallaY = game.height()-1
 class Enemigo {
 	var property position = game.center() //se cambia para cada enemigo de ser necesario
 	var property image = ""
-	var valorSpawneoRandomXI = 0// a partir de que posicion inicial en X va a spawnear aleatoriamente
-	var valorSpawneoRandomYI = 0// a partir de que posicion inicial en Y va a spawnear aleatoriamente
-	var valorSpawneoRandomXF = limitePantallaX//hasta que posicion en X e Y final puede spawnear aleatoriamente
+	var property velocidad = 0
+	var valorSpawneoRandomXI = 0 // a partir de que posicion inicial en X va a spawnear aleatoriamente
+	var valorSpawneoRandomYI = 0 // a partir de que posicion inicial en Y va a spawnear aleatoriamente
+	var valorSpawneoRandomXF = limitePantallaX //hasta que posicion en X e Y final puede spawnear aleatoriamente
 	var valorSpawneoRandomYF = limitePantallaY
-	const listaEnemigos = []
+	const listaEnemigos = #{}
+	
 	method colisionadoPor(){
 		marvin.muerte() }
 
@@ -23,19 +25,20 @@ class Enemigo {
 	
 	method dentroDelMapa (objeto) = ubicacion.posicionY(objeto) != limiteDESPAWNFondoY and ubicacion.posicionX(objeto) != limiteDESPAWNFondoX //dice si el objeto esta dentro del mapa o no
 
-	method lanzarEnemigo(frecuenciaSpawneo, velocidad, valorUp, valorDown, valorLeft, valorRight)//funcion generica para todos los enemigos, poner 0 en la direccion que no se va a mover
+	method moverEnemigo(valorUp, valorDown, valorLeft, valorRight)//cantidad de celdas que se mueve en cada direccion. Poner 0 en la direccion que no se va a mover
 		{ 
-		game.onTick(frecuenciaSpawneo,"laboratorioEnemigos",{self.crearEnemigoPosRandom(image)})
-		game.onTick(velocidad,"dispararEnemigo",{listaEnemigos.forEach( {enemigo => 
+		self.crearEnemigoPosRandom(image)
+		game.onTick(velocidad,"moverEnemigo",{listaEnemigos.forEach( {enemigo => 
 			if (self.dentroDelMapa(enemigo)) 
 			{	movimientos.moverUp(enemigo, valorUp)
 				movimientos.moverDown(enemigo, valorDown)
 				movimientos.moverLeft(enemigo, valorLeft) 
 				movimientos.moverRight(enemigo, valorRight)
 			}
-			else {self.eliminarEnemigo(enemigo)
-				} } ) } )  }
-					
+			else {self.eliminarEnemigo(enemigo) game.schedule(3000, {game.removeTickEvent("moverEnemigo")}) 
+				} } ) } )
+				}
+				
 	method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = imagen, position = self.spawnearRandom())
 		game.addVisual(nuevoEnemigo)
@@ -50,46 +53,42 @@ class Enemigo {
 	method eliminarEnemigo(enemigo){
 		game.removeVisual(enemigo)
 		listaEnemigos.remove(enemigo)}	
-		
-	method subirDificultad(){
-		
+	
+	method lanzarEnemigo(frecuenciaSpawneo, velocidadMax, valorUp, valorDown, valorLeft, valorRight){ 
+			game.onTick(frecuenciaSpawneo, "lanzarEnemigo", {
+				self.moverEnemigo(valorUp, valorDown, valorLeft, valorRight)
+				if(velocidad != velocidadMax){ 
+				velocidad = velocidadMax.max((velocidad - (velocidad * 0.1))) //los enemigos van aumentando su velocidad progresivamente
+				}
+				}
+				) 
+				
 	}	
+		
 }
 //probando nuevas imagenes (decidir si quedan o no)
-object aereosDiagonal inherits Enemigo (valorSpawneoRandomXI = 8, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 10 ){
- 	const frecuenciaSpawneo = 22000
- 	var velocidad = 300
+object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 7, valorSpawneoRandomXI=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
+ 	const frecuenciaSpawneo = 20000
+ 	const velocidadMax = 90 //maxima velocidad que alcanzara
 	method init(){
-		self.lanzarEnemigo(frecuenciaSpawneo, velocidad, 0, 1, 1, 0)
+		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 1, 0)
 	}
+				
 	override method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = ["HotAirBalloon_2.png", "Sky Diver.png"].anyOne(), position = self.spawnearRandom())
 		game.addVisual(nuevoEnemigo)
 		listaEnemigos.add(nuevoEnemigo)
 	}
-//		//game.onTick(5000,"SpawnearGlobo",{self.spawnearRandom(12, 5)}) }
-//		//game.onTick(30000,"aumentardificultad",{self.subirDificultad()})  	}//cada 2 globos aumenta la velocidad
-//	
-//	method subirDificultad() {
-//		self.aumentarVelocidad()
-//		game.removeTickEvent("EnemigoMoviendose")
-//		game.removeTickEvent("EnemigoMoviendose")
-//		self.moverseEnDireccion(velocidadIzquierda, izquierda)
-//		self.moverseEnDireccion(velocidadAbajo, abajo) }
-//		
-//	method aumentarVelocidad(){
-//		velocidadIzquierda = 100.max((velocidadIzquierda - 19))
-//		velocidadAbajo = 400.max(velocidadAbajo -15) }
-//		
 
  }
 
-object aereosHorizontal inherits Enemigo (valorSpawneoRandomXI = 12){ //probando nuevas imagenes
+object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI = 12){ 
 	const frecuenciaSpawneo = 10000
- 	var velocidad = 100
+	const velocidadMax = 30
 	method init(){
-		self.lanzarEnemigo(frecuenciaSpawneo, velocidad, 0, 0, 1, 0)
+		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 0, 1, 0)
 	}
+	
 	override method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = ["Helicopter.png", "avion.png", "Bird.png"].anyOne(), position = self.spawnearRandom())
 		game.addVisual(nuevoEnemigo)
@@ -97,12 +96,12 @@ object aereosHorizontal inherits Enemigo (valorSpawneoRandomXI = 12){ //probando
 	}
 }
 
-object bomba inherits Enemigo(image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
+object bomba inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
 	const frecuenciaSpawneo = 17000
 	var tiempoEnCaer = 3000
- 	var velocidad = 250
+	const velocidadMax = 80
 	method init(){
-		self.lanzarEnemigo(frecuenciaSpawneo, velocidad, 0, 1, 0, 0)
+		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 0, 0)
 	}
 		override method spawnearRandom (){
 		const x = (valorSpawneoRandomXI.. limiteDerechoMarvin).anyOne()
@@ -145,23 +144,24 @@ class Bala inherits Enemigo(position = cazador.position(), image = "bala1.png"){
 	const property valorLeft
 }
 
-object lanzadorDeBalas inherits Enemigo {
+object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
+	
 	var balasDisparadas = 0
 	method lanzarBala(){ //sube la dificultad segun la cantidad de disparos
-			if (balasDisparadas < 2) {
+			if (balasDisparadas < 3) {
 			self.crearBalas(1)
 			}
-			if (balasDisparadas  < 4 and balasDisparadas  >= 2)
+			if (balasDisparadas  < 5 and balasDisparadas  >= 3)
 			{
 			self.crearBalas(2) 
 			}
-			if (balasDisparadas  >= 4) {
+			if (balasDisparadas  >= 5) {
 			self.crearBalas(3)
 			}
 			balasDisparadas  += 1 
 	}
 	method moverBalas () {
-			game.onTick(500,"dispararBala",{balas.forEach( {bala => 
+			game.onTick(velocidad,"dispararBala",{balas.forEach( {bala => 
 			if (self.dentroDelMapa(bala)) 
 			{	movimientos.moverUp(bala, bala.valorUp())
 				movimientos.moverLeft(bala, bala.valorLeft()) 
