@@ -50,13 +50,13 @@ object moneda inherits Coleccionable (image = "pieniąszka 01.gif"){
 
 
 object corazon inherits Coleccionable (image = "corazon.png"){
-	
+	const property vidasQueSuma = 1
 	method init(){
 		self.spawnearColeccionable(50000) //mientras no supere el maximo de vidas permitido (falta eso)
 	}
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)
-		game.removeVisual(self) }  
-		
+		game.removeVisual(self)
+		saludMarvin.sumarVidas(self)  }  		
 }
 

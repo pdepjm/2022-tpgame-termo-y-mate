@@ -9,11 +9,11 @@ object marvin {
 	var property estaVivo = true
 	var property image = "pajaro1.png"
 	
-	var property puntos = 0
-	var property vidas = 1
+	//var property puntos = 0
+	//var property vidas = 1
 
 	//method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
-	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
+	//method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
 
 	method muerte() {
 		//self.actualizarImagen("pajaroMuerto4.png")

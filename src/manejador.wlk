@@ -49,8 +49,12 @@ object manejadorDeJuego{
 	misil.init()
 	aereosHorizontal.init()
 	aereosDiagonal.init()
+	
+	
 	score.init()
 	monedero.init()
+	saludMarvin.init()
+	
 	moneda.init()
 	corazon.init()
 	game.onCollideDo(marvin, {element => element.colisionadoPor()})
@@ -98,4 +102,19 @@ object monedero{
 		game.schedule(100,{self.puntos()})}
 }
 
+object saludMarvin{
+	var property position = game.at(11,6)
+	var property vidas = 1
+	var property image = "score.png"
+	
+	method sumarVidas(unCorazon){vidas = vidas + unCorazon.vidasQueSuma()}
+	//method sumarPuntos(unaMoneda){puntos = puntos + unaMoneda.puntosAdiciona()}
+	
+	method text() = vidas.toString()
+	method textColor() = "000000"
+	
+	method init(){
+		game.addVisual(self)
+		game.schedule(100,{self.vidas()})}
+}
 
