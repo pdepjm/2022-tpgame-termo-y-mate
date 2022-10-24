@@ -16,7 +16,11 @@ object manejadorDeJuego{
 		//game.addVisual(botonPlay)
 		
 		//TEXTO
-		game.addVisual(botonPlay) //creo que Ami se olvido de subir la iamgen, apretar espacio para empezar
+		game.addVisual(botonPlay)
+		game.addVisual(instrucciones)
+		game.addVisual(teclas)
+		game.addVisual(titulo)
+		game.addVisual(space2)
 		
 		//INICIO JUEGO
 		keyboard.space().onPressDo{self.transicion()}
@@ -24,8 +28,13 @@ object manejadorDeJuego{
 	
 	method transicion(){
 		botonPlay.cambiarImagen()
-		game.schedule(200,{game.removeVisual(botonPlay)})
-		game.schedule(200,{self.iniciarJuego()})
+		game.schedule(100,{game.removeVisual(botonPlay)})
+		//game.schedule(100,{game.removeVisual(wasd)})
+		game.schedule(100,{game.removeVisual(space2)})
+		game.schedule(100,{game.removeVisual(teclas)})
+		game.schedule(100,{game.removeVisual(titulo)})
+		game.schedule(100,{game.removeVisual(instrucciones)})
+		game.schedule(100,{self.iniciarJuego()})
 	}
 	
 	method iniciarJuego(){
