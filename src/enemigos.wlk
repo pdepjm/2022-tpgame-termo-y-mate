@@ -1,6 +1,7 @@
 import wollok.game.*
 import direcciones.*
 import marvin.*
+import sonidos.*
 
 const limiteDESPAWNFondoX = -1 //posicion en X en la que el objeto va a desaaparecer
 const limiteDESPAWNFondoY = -1 //posicion en Y en la que el objeto va a desaaparecer
@@ -58,6 +59,7 @@ class Enemigo {
 					
 	method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = imagen, position = self.spawnearRandom())
+		sonido.sonidoEnemigo(nuevoEnemigo.image())
 		game.addVisual(nuevoEnemigo)
 		listaEnemigos.add(nuevoEnemigo)
 	}
@@ -69,11 +71,9 @@ class Enemigo {
 		
 	method eliminarEnemigo(enemigo){
 		game.removeVisual(enemigo)
-		listaEnemigos.remove(enemigo)}	
-		
-	method aplicarSonido(sonido){
-		game.sound(sonido).play()
-	}	
+		listaEnemigos.remove(enemigo)}
+			
+	
 }
 
 object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 7, valorSpawneoRandomXF=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
@@ -85,6 +85,7 @@ object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 
 				
 	override method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = ["HotAirBalloon_2.png", "Sky Diver.png"].anyOne(), position = self.spawnearRandom())
+		sonido.sonidoEnemigo(nuevoEnemigo.image())
 		game.addVisual(nuevoEnemigo)
 		listaEnemigos.add(nuevoEnemigo)
 	}
@@ -99,6 +100,7 @@ object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI 
 	
 	override method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = ["Helicopter.png", "avion.png", "Bird.png"].anyOne(), position = self.spawnearRandom())
+		sonido.sonidoEnemigo(nuevoEnemigo.image())
 		game.addVisual(nuevoEnemigo)
 		listaEnemigos.add(nuevoEnemigo)
 	}
@@ -158,16 +160,16 @@ object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
 	method lanzarBala(){ //sube la dificultad segun la cantidad de disparos
 			if (balasDisparadas < 3) {
 			self.crearBalas(1)
-			self.aplicarSonido("bang_01.ogg")
+			sonido.aplicarSonido("bang_01.ogg")
 			}
 			if (balasDisparadas  < 5 and balasDisparadas  >= 3)
 			{
 			self.crearBalas(2) 
-			self.aplicarSonido("bang_02.ogg")
+			sonido.aplicarSonido("bang_02.ogg")
 			}
 			if (balasDisparadas  >= 5) {
 			self.crearBalas(3)
-			self.aplicarSonido("bang_02.ogg")
+			sonido.aplicarSonido("bang_02.ogg")
 			}
 			balasDisparadas  += 1 
 	}

@@ -2,7 +2,7 @@ import wollok.game.*
 import marvin.*
 import direcciones.*
 import marvin.*
-
+import sonidos.*
 
 object iniciarColeccionables {
 	method init (){
@@ -16,9 +16,6 @@ class Coleccionable {
 	var property position = game.center()
 	var property image = ""
 	
-	method aplicarSonido(sonido){
-		game.sound(sonido).play()
-	}
 	method spawnearRandom (limiteX, limiteY){  
 		const x = (limiteX.. limiteDerechoMarvin).anyOne() 
 		const y = (limiteY.. game.height()-1).anyOne()
@@ -43,7 +40,7 @@ object moneda inherits Coleccionable {
 	method colisionadoPor(){
 		monedero.sumarPuntos(self) 
 		game.removeVisual(self) 
-		self.aplicarSonido("coin.wav")
+		sonido.aplicarSonido("coin.wav")
 		}  
 		
 	method girar(){
@@ -82,7 +79,7 @@ object corazon inherits Coleccionable (image = "corazon.png"){
 	}
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)
-		self.aplicarSonido("corazon.mp3")
+		sonido.aplicarSonido("corazon.mp3")
 		game.removeVisual(self)  
 		saludMarvin.sumarVidas(self) 
 		

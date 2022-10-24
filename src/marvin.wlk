@@ -23,7 +23,7 @@ object marvin {
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
 		game.schedule(400, {self.image("pajaroMuerto4.png")})
 		if(saludMarvin.vidas() == 0){
-		game.schedule(700, {manejadorDeJuego.juegoFinalizado()}) 
+		game.schedule(500, {manejadorDeJuego.juegoFinalizado()}) 
 		estaVivo = false
 			}
 		}
