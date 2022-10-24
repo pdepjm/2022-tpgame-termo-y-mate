@@ -96,7 +96,7 @@ object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI 
 	}
 }
 
-object bomba inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
+object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
 	const frecuenciaSpawneo = 17000
 	var tiempoEnCaer = 3000
 	const velocidadMax = 80

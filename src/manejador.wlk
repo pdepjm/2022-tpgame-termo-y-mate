@@ -2,7 +2,8 @@ import wollok.game.*
 import marvin.*
 import fondo.*
 import enemigos.*
-
+import coleccionables.*
+import menu.*
 
 object manejadorDeJuego{
 	method iniciarPantallaDeInicio(){
@@ -45,7 +46,7 @@ object manejadorDeJuego{
   	fondo.cargarFondo()
   	marvin.init()
    	cazador.init()
-	bomba.init()
+	misil.init()
 	aereosHorizontal.init()
 	aereosDiagonal.init()
 	score.init()
@@ -57,7 +58,7 @@ object manejadorDeJuego{
 	
 	//que ahcer cuando finaliza el juego
 	method juegoFinalizado(){
-		//	game.schedule(1500, {game.addVisual(fin)})
+			game.schedule(100, {game.addVisual(fin)})
 			game.clear()
 			//sacar los elementos de pantalla
 			//podemos hacer que vuelva al menu de inicio (falta menu)
@@ -66,11 +67,20 @@ object manejadorDeJuego{
 
 object fin{
 	var property position = game.at(4,4)
-	method image ()= "gameover.png"
+	var property image = "gameover.png"
 	
 }
 
 
-
+object score{
+	var property position = game.at(12,6)
+	var contadorKms = 0
+	var property image = "score.png"
+	method text() = contadorKms.toString()
+	method textColor() = "000000"
+	method init(){
+		game.addVisual(self)
+		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
+		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}}
 
 

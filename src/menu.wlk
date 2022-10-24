@@ -29,9 +29,43 @@ object menu{
   //  const property image =                  
 //}
 
+/*
+object teclas {
+	const property position = game.at(7,3)
+	var property image = "wasd.png"
+} 
+*/
 
 
 
+class Texto {
+	const property position //= game.at(6,0)
+	const property text
+	const property textColor
+	
+	//method text() = "presione SPACE para iniciar el juego"
+	//method textColor() = "000000"
+}
+
+//const space = new Texto(position = game.at(6,0), text ="presione SPACE para seleccionar", textColor = "000000")
+//const wasd = new Texto(position = game.at(8,5), text ="teclas con las que se juega", textColor = "000000")
+
+class Imagen {
+	const property position
+	var property image
+}
+
+const teclas = new Imagen(position = game.at(8,2), image = "wasdCeleste.png")
+const titulo = new Imagen(position = game.at(2,3), image = "TituloDodgyBirdGrande.png")
+const space2 = new Imagen(position = game.at(4,0), image = "texto-space2.png")
+const instrucciones = new Imagen(position = game.at(3,2), image = "instrucciones2.png")
+ 
+object botonPlay inherits Imagen(position = game.at(4,1), image ="botonPlayCeleste.png") {
+
+	method cambiarImagen() {
+		image = "botonPlayCeleste2.png"
+	}
+}
 
 
 

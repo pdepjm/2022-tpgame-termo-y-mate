@@ -23,44 +23,10 @@ object fondo {
   		game.addVisual(nube1)
   		game.addVisual(nube2)
   		game.addVisual(nube3)
-  		//game.boardGround("cielo.jpg")
+  		game.boardGround("cielo.jpg")
 		game.onTick(200,"laboratorioDeNubes",{nubes.forEach( {nubesita => if (ubicacion.posicionX(nubesita) != limiteNubeX)
 			{movimientos.moverLeft(nubesita,1)} else {nubesita.volverADerecha()}            }         )     }     )
 }
 		
 } // CERRAMOS EL METODO CARGAR FONDO
 
-class Texto {
-	const property position //= game.at(6,0)
-	const property text
-	const property textColor
-	
-	//method text() = "presione SPACE para iniciar el juego"
-	//method textColor() = "000000"
-}
-
-//const space = new Texto(position = game.at(6,0), text ="presione SPACE para seleccionar", textColor = "000000")
-//const wasd = new Texto(position = game.at(8,5), text ="teclas con las que se juega", textColor = "000000")
-
-class Imagen {
-	const property position
-	var property image
-}
-
-const teclas = new Imagen(position = game.at(8,2), image = "wasdCeleste.png")
-const titulo = new Imagen(position = game.at(3,3), image = "TituloDodgyBirdGrande.png")
-const space2 = new Imagen(position = game.at(4,0), image = "texto-space2.png")
-const instrucciones = new Imagen(position = game.at(3,2), image = "instrucciones2.png")
- 
-object botonPlay inherits Imagen(position = game.at(4,1), image ="botonPlayCeleste.png") {
-
-	method cambiarImagen() {
-		image = "botonPlayCeleste2.png"
-	}
-}
-/*
-object teclas {
-	const property position = game.at(7,3)
-	var property image = "wasd.png"
-} 
-*/
