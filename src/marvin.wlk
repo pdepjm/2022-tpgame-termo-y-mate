@@ -12,7 +12,7 @@ object marvin {
 	var property puntos = 0
 	var property vidas = 1
 
-	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
+	//method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
 	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
 
 	method muerte() {

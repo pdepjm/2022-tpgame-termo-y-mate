@@ -1,6 +1,7 @@
 import wollok.game.*
 import marvin.*
 import direcciones.*
+import manejador.*
 
 class Coleccionable {
 	
@@ -22,6 +23,8 @@ class Coleccionable {
 }
 }
 object moneda inherits Coleccionable (image = "pieniąszka 01.gif"){
+	const property puntosAdiciona = 100
+	
 	method init(){
 		self.spawnearColeccionable(10000)
 		self.girar()
@@ -39,7 +42,7 @@ object moneda inherits Coleccionable (image = "pieniąszka 01.gif"){
 	
 	}
 	method colisionadoPor(){
-		//marvin.sumarPuntos(self) ver bien esto
+		monedero.sumarPuntos(self) 
 		game.removeVisual(self) 
 		}  
 	}

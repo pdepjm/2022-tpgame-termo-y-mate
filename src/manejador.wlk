@@ -50,6 +50,7 @@ object manejadorDeJuego{
 	aereosHorizontal.init()
 	aereosDiagonal.init()
 	score.init()
+	monedero.init()
 	moneda.init()
 	corazon.init()
 	game.onCollideDo(marvin, {element => element.colisionadoPor()})
@@ -71,7 +72,6 @@ object fin{
 	
 }
 
-
 object score{
 	var property position = game.at(12,6)
 	var contadorKms = 0
@@ -82,5 +82,20 @@ object score{
 		game.addVisual(self)
 		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
 		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}}
+		
+object monedero{
+	var property position = game.at(10,6)
+	var property puntos = 0
+	var property image = "score.png"
+	
+	method sumarPuntos(unaMoneda){puntos = puntos + unaMoneda.puntosAdiciona()}
+	
+	method text() = puntos.toString()
+	method textColor() = "000000"
+	
+	method init(){
+		game.addVisual(self)
+		game.schedule(100,{self.puntos()})}
+}
 
 
