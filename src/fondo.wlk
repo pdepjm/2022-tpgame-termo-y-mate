@@ -12,11 +12,10 @@ class Nube{
 		} // CERRAMOS LA CLASE NUBE
 	
 object fondo {	
-	const limiteNubeX = -1
+	const limiteNubeX = -5
 	const nube1 = new Nube(resetPosition = game.at(13, 5), position = game.at(11, 5),image = "Cloud_1.png")
 	const nube2 = new Nube(resetPosition = game.at(13, 3), position = game.at(3, 3),image = "Cloud_2.png")
 	const nube3 = new Nube(resetPosition = game.at(13, 1), position = game.at(8, 1),image = "Cloud_2.png") 
-	
 	const nubes = [nube1, nube2, nube3]
 	
 	method cargarFondo(){

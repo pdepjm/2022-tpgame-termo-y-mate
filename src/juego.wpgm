@@ -12,7 +12,6 @@ program juego {
   	game.cellSize(100) //100
   	
   	manejadorDeJuego.iniciarPantallaDeInicio()
-
   	game.start()
 }
 

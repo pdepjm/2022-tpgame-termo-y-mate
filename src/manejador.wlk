@@ -14,7 +14,6 @@ object manejadorDeJuego{
 		
 		//FONDO DE PANTALLA
 		game.boardGround("cielo2.png")
-		//game.addVisual(botonPlay)
 		
 		//TEXTO
 		game.addVisual(botonPlay)
@@ -38,29 +37,21 @@ object manejadorDeJuego{
 		game.schedule(100,{self.iniciarJuego()})
 	}
 	
-	method iniciarJuego(){
-	//game.showAttributes(marvin)
-			
-	game.ground("cielo.png") //borrar esto si no queres ver las celdas
- 
-  	fondo.cargarFondo()
-  	marvin.init()
-   	cazador.init()
-	misil.init()
-	aereosHorizontal.init()
-	aereosDiagonal.init()
-	score.init()
-	moneda.init()
-	corazon.init()
-	game.onCollideDo(marvin, {element => element.colisionadoPor()})
+	method iniciarJuego(){		
+		//game.ground("cielo.png") //borrar esto si no queres ver las celdas
+  		fondo.cargarFondo()
+  		marvin.init()
+		score.init()
+		iniciarEnemigos.init()
+		iniciarColeccionables.init()
 	
+		game.onCollideDo(marvin, {element => element.colisionadoPor()})
 	}
 	
-	//que ahcer cuando finaliza el juego
+	//cuando finaliza el juego
 	method juegoFinalizado(){
 			game.schedule(100, {game.addVisual(fin)})
 			game.clear()
-			//sacar los elementos de pantalla
 			//podemos hacer que vuelva al menu de inicio (falta menu)
       }
 }
@@ -68,19 +59,19 @@ object manejadorDeJuego{
 object fin{
 	var property position = game.at(4,4)
 	var property image = "gameover.png"
-	
 }
-
 
 object score{
 	var property position = game.at(12,6)
 	var contadorKms = 0
 	var property image = "score.png"
+	
 	method text() = contadorKms.toString()
 	method textColor() = "000000"
 	method init(){
 		game.addVisual(self)
 		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
-		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}}
+		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}
+	}
 
 

@@ -8,13 +8,15 @@ object marvin {
 	var property positionSig = position
 	var property estaVivo = true
 	var property image = "pajaro1.png"
-	
 	var property puntos = 0
 	var property vidas = 1
-
-	method sumarPuntos(unObjeto){puntos = puntos + unObjeto.puntosAdiciona()}
-	method sumarVidas(unObjeto){vidas = vidas + unObjeto.vidasQueSuma()}
-
+	
+	method init() {
+		game.addVisual(self)
+		self.volar()
+		self.controles()
+	}
+	
 	method muerte() {
 		//self.actualizarImagen("pajaroMuerto4.png")
 		game.schedule(100, {self.image("pajaroMuerto1.png")})
@@ -22,12 +24,11 @@ object marvin {
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
 		game.schedule(400, {self.image("pajaroMuerto4.png")})
 		//game.removeVisual(self)
-		manejadorDeJuego.juegoFinalizado()
-		
-		//game.schedule(1000,{game.addVisual(fin)})
-		//faltaria poner el removeVisual o pantalla de muerte
+		if(vidas == 0){
+		game.schedule(700, {manejadorDeJuego.juegoFinalizado()}) 
 		estaVivo = false
-		 }
+			}
+		}
 
 	method volar(){
 		game.onTick(1000, "Volar",{
@@ -47,16 +48,21 @@ object marvin {
     		keyboard.s().onPressDo {self.moverseA(abajoMarvin)} 
     		keyboard.a().onPressDo {self.moverseA(izquierdaMarvin)}
     		keyboard.d().onPressDo {self.moverseA(derechaMarvin)}
-    	//keyboard.space().onPressDo {self.subirMucho(
     	}
-    	
-    	
-	method init() {
-		game.addVisual(self)
-		self.volar()
-		self.controles()
-	}
-
 }
 
-		
+object saludMarvin{
+	var property position = game.at(11,6)
+	var property vidas = 1
+	var property image = "score.png"
+
+	method sumarVidas(unCorazon){vidas += unCorazon.vidasQueSuma()}
+	method restarVidas(){vidas -= 1}
+
+	method text() = vidas.toString()
+	method textColor() = "000000"
+
+	method init(){
+		game.addVisual(self)
+		game.schedule(100,{self.vidas()})}
+}		

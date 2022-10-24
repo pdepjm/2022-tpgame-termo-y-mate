@@ -5,24 +5,33 @@ import marvin.*
 const limiteDESPAWNFondoX = -1 //posicion en X en la que el objeto va a desaaparecer
 const limiteDESPAWNFondoY = -1 //posicion en Y en la que el objeto va a desaaparecer
 const limitePantallaX = game.width()-1 // limite de X en pantalla
-const limitePantallaY = game.height()-1
+const limitePantallaY = game.height()-1 //limite de Y en pantalla
+
+object iniciarEnemigos{
+	
+	method init(){
+		cazador.init()
+		misil.init()
+		aereosHorizontal.init()
+		aereosDiagonal.init()
+	}	
+}
 
 class Enemigo {
 	var property position = game.center() //se cambia para cada enemigo de ser necesario
 	var property image = ""
 	var property velocidad = 0
-	var valorSpawneoRandomXI = 0 // a partir de que posicion inicial en X va a spawnear aleatoriamente
-	var valorSpawneoRandomYI = 0 // a partir de que posicion inicial en Y va a spawnear aleatoriamente
-	var valorSpawneoRandomXF = limitePantallaX //hasta que posicion en X e Y final puede spawnear aleatoriamente
-	var valorSpawneoRandomYF = limitePantallaY
+	const valorSpawneoRandomXI = 0 // a partir de que posicion inicial en X va a spawnear aleatoriamente
+	const valorSpawneoRandomYI = 0 // a partir de que posicion inicial en Y va a spawnear aleatoriamente
+	const valorSpawneoRandomXF = limitePantallaX //hasta que posicion en X e Y final puede spawnear aleatoriamente
+	const valorSpawneoRandomYF = limitePantallaY
 	const listaEnemigos = #{}
 	
 	method colisionadoPor(){
-		marvin.muerte() }
+		marvin.muerte() 
+		if(saludMarvin.vidas() == 1) {marvin.muerte()} else {saludMarvin.restarVidas()}
+		}
 
-	method deSpawnear(){
-		game.removeVisual(self) }
-	
 	method dentroDelMapa (objeto) = ubicacion.posicionY(objeto) != limiteDESPAWNFondoY and ubicacion.posicionX(objeto) != limiteDESPAWNFondoX //dice si el objeto esta dentro del mapa o no
 
 	method moverEnemigo(valorUp, valorDown, valorLeft, valorRight)//cantidad de celdas que se mueve en cada direccion. Poner 0 en la direccion que no se va a mover
@@ -38,7 +47,14 @@ class Enemigo {
 			else {self.eliminarEnemigo(enemigo) game.schedule(3000, {game.removeTickEvent("moverEnemigo")}) 
 				} } ) } )
 				}
-				
+	
+	method lanzarEnemigo(frecuenciaSpawneo, velocidadMax, valorUp, valorDown, valorLeft, valorRight){ 
+			game.onTick(frecuenciaSpawneo, "lanzarEnemigo", {
+				self.moverEnemigo(valorUp, valorDown, valorLeft, valorRight)
+				if(velocidad != velocidadMax){ 
+				velocidad = velocidadMax.max((velocidad - (velocidad * 0.1))) //los enemigos van aumentando su velocidad progresivamente
+				}}) }
+					
 	method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = imagen, position = self.spawnearRandom())
 		game.addVisual(nuevoEnemigo)
@@ -53,21 +69,13 @@ class Enemigo {
 	method eliminarEnemigo(enemigo){
 		game.removeVisual(enemigo)
 		listaEnemigos.remove(enemigo)}	
-	
-	method lanzarEnemigo(frecuenciaSpawneo, velocidadMax, valorUp, valorDown, valorLeft, valorRight){ 
-			game.onTick(frecuenciaSpawneo, "lanzarEnemigo", {
-				self.moverEnemigo(valorUp, valorDown, valorLeft, valorRight)
-				if(velocidad != velocidadMax){ 
-				velocidad = velocidadMax.max((velocidad - (velocidad * 0.1))) //los enemigos van aumentando su velocidad progresivamente
-				}
-				}
-				) 
-				
-	}	
 		
+	method aplicarSonido(sonido){
+		game.sound(sonido).play()
+	}	
 }
-//probando nuevas imagenes (decidir si quedan o no)
-object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 7, valorSpawneoRandomXI=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
+
+object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 7, valorSpawneoRandomXF=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
  	const frecuenciaSpawneo = 20000
  	const velocidadMax = 90 //maxima velocidad que alcanzara
 	method init(){
@@ -79,7 +87,6 @@ object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 
 		game.addVisual(nuevoEnemigo)
 		listaEnemigos.add(nuevoEnemigo)
 	}
-
  }
 
 object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI = 12){ 
@@ -98,7 +105,6 @@ object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI 
 
 object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
 	const frecuenciaSpawneo = 17000
-	var tiempoEnCaer = 3000
 	const velocidadMax = 80
 	method init(){
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 0, 0)
@@ -106,7 +112,7 @@ object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir
 		override method spawnearRandom (){
 		const x = (valorSpawneoRandomXI.. limiteDerechoMarvin).anyOne()
 		const y = 12
-		game.say(marvin, "¡Se aproxima una bomba!")
+		game.say(marvin, "¡Se aproxima un misil!")
 		return game.at(x,y) }		
 }
 	
@@ -114,9 +120,10 @@ object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir
 object cazador inherits Enemigo (image = "JK_P_Gun__Attack_000.png", valorSpawneoRandomXI = 9, valorSpawneoRandomYI = 0, valorSpawneoRandomYF = 0)
 	{
 	const frecuenciaSpawneo = 30000
+	
 	override method position(pos){ //necesito que sea getter
-		position = self.spawnearRandom()
-	}
+		position = self.spawnearRandom()}
+		
 	method disparar(){
 		game.schedule(200, {self.image("JK_P_Gun__Attack_001.png")})
 		game.schedule(300, {self.image("JK_P_Gun__Attack_002.png")})
@@ -125,7 +132,7 @@ object cazador inherits Enemigo (image = "JK_P_Gun__Attack_000.png", valorSpawne
 		game.schedule(600, {self.image("JK_P_Gun__Attack_005.png")})
 		game.schedule(700, {self.image("JK_P_Gun__Attack_007.png")})
 		game.schedule(900, {self.image("JK_P_Gun__Attack_009.png")})
-		game.schedule(1500, {self.deSpawnear()})
+		game.schedule(1500, {game.removeVisual(self)})
 		}
 
 	method init (){
@@ -150,13 +157,16 @@ object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
 	method lanzarBala(){ //sube la dificultad segun la cantidad de disparos
 			if (balasDisparadas < 3) {
 			self.crearBalas(1)
+			self.aplicarSonido("bang_01.ogg")
 			}
 			if (balasDisparadas  < 5 and balasDisparadas  >= 3)
 			{
 			self.crearBalas(2) 
+			self.aplicarSonido("bang_02.ogg")
 			}
 			if (balasDisparadas  >= 5) {
 			self.crearBalas(3)
+			self.aplicarSonido("bang_02.ogg")
 			}
 			balasDisparadas  += 1 
 	}
@@ -170,20 +180,17 @@ object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
 			} ) } )  
 	}
 	
-	method crearBalas(cant){
+	method crearBalas(cant){ //crear balas segun la cantidad, maximo 3
 		if(cant == 3)
 		{
-			self.crearBala("bala1.png")
 			self.crearBala("bala2.png")
-			self.crearBala("bala3.png")		//probe con times y no se como hacer para que ande bien //2.times({self.crearBala()})
+			self.crearBala("bala3.png")	
 		}
 		if (cant == 2) {
-			self.crearBala("bala1.png")
 			self.crearBala("bala2.png")
 		}
-		else {
 			self.crearBala("bala1.png")
-		}
+
 	}
 	method crearBala(imagen){
 		const bala = new Bala(position = cazador.position(), image = imagen, valorUp = (0.. 1).anyOne(), valorLeft = (1.. 2).anyOne())
@@ -194,7 +201,5 @@ object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
 		game.removeVisual(bala)
 		balas.remove(bala)
 	}
-
-	
 }
 
