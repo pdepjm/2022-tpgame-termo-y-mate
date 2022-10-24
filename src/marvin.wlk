@@ -9,7 +9,6 @@ object marvin {
 	var property estaVivo = true
 	var property image = "pajaro1.png"
 	var property puntos = 0
-	var property vidas = 1
 	
 	method init() {
 		game.addVisual(self)
@@ -23,8 +22,7 @@ object marvin {
 		game.schedule(200, {self.image("pajaroMuerto2.png")})
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
 		game.schedule(400, {self.image("pajaroMuerto4.png")})
-		//game.removeVisual(self)
-		if(vidas == 0){
+		if(saludMarvin.vidas() == 0){
 		game.schedule(700, {manejadorDeJuego.juegoFinalizado()}) 
 		estaVivo = false
 			}
@@ -52,11 +50,13 @@ object marvin {
 }
 
 object saludMarvin{
-	var property position = game.at(11,6)
+	var property position = game.at(12,5)
 	var property vidas = 1
-	var property image = "score.png"
+	var property image = "corazon.png"
 
-	method sumarVidas(unCorazon){vidas += unCorazon.vidasQueSuma()}
+	method sumarVidas(unCorazon){
+		if(vidas == 3) {} else vidas += 1
+	}
 	method restarVidas(){vidas -= 1}
 
 	method text() = vidas.toString()

@@ -29,7 +29,8 @@ class Enemigo {
 	
 	method colisionadoPor(){
 		marvin.muerte() 
-		if(saludMarvin.vidas() == 1) {marvin.muerte()} else {saludMarvin.restarVidas()}
+		saludMarvin.restarVidas()
+		 marvin.muerte() 
 		}
 
 	method dentroDelMapa (objeto) = ubicacion.posicionY(objeto) != limiteDESPAWNFondoY and ubicacion.posicionX(objeto) != limiteDESPAWNFondoX //dice si el objeto esta dentro del mapa o no

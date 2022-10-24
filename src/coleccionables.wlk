@@ -34,7 +34,7 @@ class Coleccionable {
 }
 }
 object moneda inherits Coleccionable {
-	const property puntosAdiciona = 100
+	const property puntosAdiciona = 1
 	method init(){
 		self.spawnearColeccionable(10000)
 		self.girar()
@@ -61,11 +61,11 @@ object moneda inherits Coleccionable {
 
 	}
 object monedero{
-	var property position = game.at(10,6)
+	var property position = game.at(12,4)
 	var property puntos = 0
-	var property image = "score.png"
+	var property image = "moneda 1.png"
 
-	method sumarPuntos(unaMoneda){puntos = puntos + unaMoneda.puntosAdiciona()}
+	method sumarPuntos(unaMoneda){puntos += 1}
 
 	method text() = puntos.toString()
 	method textColor() = "000000"
@@ -76,15 +76,16 @@ object monedero{
 }
 
 object corazon inherits Coleccionable (image = "corazon.png"){
-	const property vidasQueSuma = 1
-	
+
 	method init(){
-		self.spawnearColeccionable(50000) //mientras no supere el maximo de vidas permitido (falta eso)
+		self.spawnearColeccionable(45000) //mientras no supere el maximo de vidas permitido (falta eso)
 	}
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)
 		self.aplicarSonido("corazon.mp3")
 		game.removeVisual(self)  
-		saludMarvin.sumarVidas(self)  }  		
+		saludMarvin.sumarVidas(self) 
+		
+		 }  		
 }
 
