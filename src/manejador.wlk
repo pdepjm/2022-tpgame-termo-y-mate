@@ -34,31 +34,30 @@ object manejadorDeJuego{
 	}
 	
 	method transicion(){
-		if (botonPlay.seleccionado()) {
+		if (botonPlay.seleccionado() and game.hasVisual(botonPlay)) {
 			botonPlay.cambiarImagen()
-			self.borrarTodo()
+			//self.borrarTodo()
+			game.clear()
 			game.schedule(100,{self.iniciarJuego()})
 		}
-		if (botonInstrucciones.seleccionado()) {
+		if (botonInstrucciones.seleccionado() and game.hasVisual(botonInstrucciones)) {
 			botonInstrucciones.cambiarImagen()
 			game.schedule(100,{game.removeVisual(botonInstrucciones)})
 			game.schedule(100,{game.removeVisual(teclas)})
 			self.mostrarInstrucciones()
 				
 		}
-		else self.esperar()
+		//else self.esperar() no hace falta
 	}
 	
 	method esperar() {}
 	
-	method borrarTodo(){
-		game.schedule(100,{game.removeVisual(botonPlay)})
-		game.schedule(100,{game.removeVisual(botonInstrucciones)})
-		game.schedule(100,{game.removeVisual(space2)})
-		game.schedule(100,{game.removeVisual(teclas)})
-		game.schedule(100,{game.removeVisual(titulo)})
-		game.schedule(100,{game.removeVisual(instrucciones)})
-	}
+//	method borrarTodo(){ es mejor poner game.clear()
+//		game.schedule(100,{game.removeVisual(botonPlay)})
+//		if(!botonInstrucciones.seleccionado()) {game.schedule(100, {game.removeVisual(botonInstrucciones) game.removeVisual(teclas)})}
+//		game.schedule(100,{game.removeVisual(titulo)})
+//		game.schedule(100,{game.removeVisual(instrucciones)})
+//	}
 	method mostrarInstrucciones(){
 		//agregar imagenes de instrucciones
 	}

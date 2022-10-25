@@ -14,6 +14,7 @@ object marvin {
 		game.addVisual(self)
 		self.volar()
 		self.controles()
+		game.schedule(2000, {self.bajarSiempre()})
 	}
 	
 	method muerte() {
@@ -37,7 +38,16 @@ object marvin {
 		game.schedule(800, {self.image("pajaro1.png")})
 		})
 		}
-	
+		
+	method bajarSiempre(){ //que dicen?
+		game.onTick(1000, "bajarMarvin", {
+			const posicionAnterior = self.position() 
+			game.schedule(500, {if(self.position().y() == posicionAnterior.y()) self.moverseA(abajoMarvin)}) 
+			//game.onTick(300, "bajarSeguido", {keyboard.w().onPressDo{game.removeTickEvent("bajarSeguido")} self.moverseA(abajoMarvin)})
+		})
+		
+	}
+
     method moverseA(direccion) {
             	position = direccion.siguientePosicion(position)
      }
