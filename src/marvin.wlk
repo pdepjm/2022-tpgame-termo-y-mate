@@ -51,8 +51,8 @@ object marvin {
 }
 
 object saludMarvin{
-	var property position = game.at(12,5)
-	var property vidas = 30
+	var property position = game.at(12,4)
+	var property vidas = 1
 
 	method sumarVidas(unCorazon){
 		if(vidas == 3) {} else vidas += 1

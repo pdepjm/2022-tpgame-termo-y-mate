@@ -58,9 +58,8 @@ object moneda inherits Coleccionable {
 
 	}
 object monedero{
-	var property position = game.at(12,4)
+	var property position = game.at(12,5)
 	var property puntos = 0
-	var property image = "moneda 1.png"
 
 	method sumarPuntos(unaMoneda){puntos += 1}
 

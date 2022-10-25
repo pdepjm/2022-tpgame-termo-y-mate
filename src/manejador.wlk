@@ -69,10 +69,8 @@ object manejadorDeJuego{
   		game.addVisual(contador)
   		marvin.init()
 		score.init()
-		monedero.init()
-		saludMarvin.init()
 		iniciarEnemigos.init()
-		iniciarColeccionables.init()
+		iniciarColeccionables.init() //saludMarvin y Monedero
 	
 		game.onCollideDo(marvin, {element => element.colisionadoPor()})
 	}
