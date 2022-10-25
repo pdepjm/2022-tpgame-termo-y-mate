@@ -1,12 +1,6 @@
 import wollok.game.*
 import manejador.*
 
-class Texto {
-	const property position //= game.at(6,0)
-	const property text
-	const property textColor
-}
-
 class Imagen {
 	const property position
 	var property image
@@ -17,6 +11,7 @@ const titulo = new Imagen(position = game.at(3,3), image = "TituloDodgyBirdGrand
 const space2 = new Imagen(position = game.at(4,0), image = "texto-space2.png")
 const instrucciones = new Imagen(position = game.at(3,2), image = "instrucciones2.png")
 const gameOver = new Imagen(position = game.center(), image = "gameover.png")
+const contador = new Imagen(position = game.at(12,4), image = "contador.png")
  
 object botonPlay inherits Imagen(position = game.at(4,1), image ="botonPlayCeleste.png") {
 	var property seleccionado = false

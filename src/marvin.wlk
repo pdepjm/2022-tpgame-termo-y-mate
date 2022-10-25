@@ -53,7 +53,6 @@ object marvin {
 object saludMarvin{
 	var property position = game.at(12,5)
 	var property vidas = 30
-	var property image = "corazon.png"
 
 	method sumarVidas(unCorazon){
 		if(vidas == 3) {} else vidas += 1
