@@ -77,14 +77,14 @@ object manejadorDeJuego{
 	
 	//cuando finaliza el juego
 	method juegoFinalizado(){
-			game.schedule(100, {game.addVisual(fin)})
 			game.clear()
+			game.schedule(100, {game.addVisual(fin)})
 			//podemos hacer que vuelva al menu de inicio (falta menu)
       }
 }
 
 object fin{
-	var property position = game.at(4,4)
+	var property position = game.at(4,3)
 	var property image = "gameover.png"
 }
 

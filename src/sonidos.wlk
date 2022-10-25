@@ -29,7 +29,7 @@ object musicaFondo {
 		game.schedule(500,{soundtrack.play()})
 	}
 	method controlesMusica(){
-		keyboard.r().onPressDo{if(soundtrack.paused())self.resume()}
+		keyboard.r().onPressDo{if(soundtrack.paused()) self.resume()}
 		keyboard.p().onPressDo{if(!soundtrack.paused()) self.pause()}
 		keyboard.up().onPressDo{self.subirVolumen()}
 		keyboard.down().onPressDo{self.bajarVolumen()}
