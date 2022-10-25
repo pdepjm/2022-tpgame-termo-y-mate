@@ -9,7 +9,7 @@ class Imagen {
 const teclas = new Imagen(position = game.at(8,2), image = "wasdCeleste.png")
 const titulo = new Imagen(position = game.at(2,3), image = "TituloDodgyBirdGrande2.png")
 const space2 = new Imagen(position = game.at(4,0), image = "texto-space2.png")
-const instrucciones = new Imagen(position = game.at(3,2), image = "instrucciones2.png")
+const instrucciones = new Imagen(position = game.at(2,2), image = "recuadroInfo.png")
 const gameOver = new Imagen(position = game.center(), image = "gameover.png")
 const contador = new Imagen(position = game.at(12,4), image = "contador2.png")
  
