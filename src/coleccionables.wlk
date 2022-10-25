@@ -3,6 +3,7 @@ import marvin.*
 import direcciones.*
 import marvin.*
 import sonidos.*
+import manejador.*
 
 object iniciarColeccionables {
 	method init (){
@@ -40,6 +41,7 @@ object moneda inherits Coleccionable {
 	method colisionadoPor(){
 		monedero.sumarPuntos(self) 
 		game.removeVisual(self) 
+		score.adicionarScorePorMoneda() 
 		sonido.aplicarSonido("coin.wav")
 		}  
 		
