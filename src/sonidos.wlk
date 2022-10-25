@@ -11,10 +11,10 @@ object sonido{
 	{
 		if(imagen == "HotAirBalloon_2.png"){self.aplicarSonido("balloon.mp3")}
 		//game.sound(sonido).play() 
-		if(imagen == "Sky Diver.png"){self.aplicarSonido("")}
+		if(imagen == "Sky Diver.png"){self.aplicarSonido("skyDiver.mp3")}
 		if(imagen == "Missile.png"){self.aplicarSonido("Missile.mp3")}
 		if(imagen == "Helicopter.png"){self.aplicarSonido("helicopter.mp3")}
-		if(imagen == "avion.png"){self.aplicarSonido("airplane.ogg")}
+		if(imagen == "avion.png"){self.aplicarSonido("airplane.mp3")}
 		if(imagen == "Bird.png"){self.aplicarSonido("eagle.mp3")}
 		else {}
 	}

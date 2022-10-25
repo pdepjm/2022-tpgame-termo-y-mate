@@ -1,7 +1,7 @@
 import wollok.game.*
 import direcciones.*
 import manejador.*
-
+import sonidos.*
 
 object marvin {
 	var property position = game.at(1,4)
@@ -22,6 +22,7 @@ object marvin {
 		game.schedule(200, {self.image("pajaroMuerto2.png")})
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
 		game.schedule(400, {self.image("pajaroMuerto4.png")})
+		sonido.aplicarSonido("muerteMarvin.wav")
 		if(saludMarvin.vidas() == 0){
 		game.schedule(500, {manejadorDeJuego.juegoFinalizado()}) 
 		estaVivo = false
@@ -51,7 +52,7 @@ object marvin {
 
 object saludMarvin{
 	var property position = game.at(12,5)
-	var property vidas = 1
+	var property vidas = 30
 	var property image = "corazon.png"
 
 	method sumarVidas(unCorazon){
