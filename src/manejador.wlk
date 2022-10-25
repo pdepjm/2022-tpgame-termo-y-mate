@@ -4,37 +4,62 @@ import fondo.*
 import enemigos.*
 import coleccionables.*
 import menu.*
+import sonidos.*
 
 object manejadorDeJuego{
 	method iniciarPantallaDeInicio(){
 		// SONIDO
-		const soundtrack = game.sound("menu-soundtrack.mp3")		
-		soundtrack.shouldLoop(true)
-		game.schedule(500,{soundtrack.play()})
+		musicaFondo.play()
+		musicaFondo.controlesMusica()
 		
 		//FONDO DE PANTALLA
-		game.boardGround("cielo2.png")
+		game.boardGround("cielo1.jpg")
 		
 		//TEXTO
 		game.addVisual(botonPlay)
+		game.addVisual(botonInstrucciones)
 		game.addVisual(instrucciones)
 		game.addVisual(teclas)
 		game.addVisual(titulo)
 		game.addVisual(space2)
+		keyboard.a().onPressDo{botonPlay.cambiarImagen()}
+		keyboard.d().onPressDo{botonPlay.cambiarImagen2()}
+		keyboard.d().onPressDo{botonInstrucciones.cambiarImagen()}
+		keyboard.a().onPressDo{botonInstrucciones.cambiarImagen2()}
+		//mover de un boton a otro con a y d seleccionar con space
 		
 		//INICIO JUEGO
 		keyboard.space().onPressDo{self.transicion()}
 	}
 	
 	method transicion(){
-		botonPlay.cambiarImagen()
+		if (botonPlay.seleccionado()) {
+			botonPlay.cambiarImagen()
+			self.borrarTodo()
+			game.schedule(100,{self.iniciarJuego()})
+		}
+		if (botonInstrucciones.seleccionado()) {
+			botonInstrucciones.cambiarImagen()
+			game.schedule(100,{game.removeVisual(botonInstrucciones)})
+			game.schedule(100,{game.removeVisual(teclas)})
+			self.mostrarInstrucciones()
+				
+		}
+		else self.esperar()
+	}
+	
+	method esperar() {}
+	
+	method borrarTodo(){
 		game.schedule(100,{game.removeVisual(botonPlay)})
-		//game.schedule(100,{game.removeVisual(wasd)})
+		game.schedule(100,{game.removeVisual(botonInstrucciones)})
 		game.schedule(100,{game.removeVisual(space2)})
 		game.schedule(100,{game.removeVisual(teclas)})
 		game.schedule(100,{game.removeVisual(titulo)})
 		game.schedule(100,{game.removeVisual(instrucciones)})
-		game.schedule(100,{self.iniciarJuego()})
+	}
+	method mostrarInstrucciones(){
+		//agrgar imagenes de instrucciones
 	}
 	
 	method iniciarJuego(){		

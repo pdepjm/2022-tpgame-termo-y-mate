@@ -20,3 +20,30 @@ object sonido{
 	}
 	
 	}
+
+object musicaFondo {
+	const soundtrack = game.sound("pencil-maze.mp3")
+	
+	method play() {		
+		soundtrack.shouldLoop(true)
+		game.schedule(500,{soundtrack.play()})
+	}
+	method controlesMusica(){
+		keyboard.r().onPressDo{self.resume()}
+		keyboard.p().onPressDo{self.pause()}
+		keyboard.up().onPressDo{self.subirVolumen()}
+		keyboard.down().onPressDo{self.bajarVolumen()}
+	}
+	method resume() {
+		soundtrack.resume()
+	}
+	method pause() {
+		soundtrack.pause()
+	}
+	method subirVolumen() {
+		soundtrack.volume(soundtrack.volume() * 1.2)
+	}
+	method bajarVolumen() {
+		soundtrack.volume(soundtrack.volume() * 0.8)
+	}
+}
