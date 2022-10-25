@@ -92,6 +92,7 @@ object score{
 	var property position = game.at(12,6)
 	var contadorKms = 0
 	
+	method adicionarScorePorMoneda(){contadorKms+=50}
 	method text() = contadorKms.toString()
 	method textColor() = "000000"
 	method init(){
