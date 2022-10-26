@@ -16,10 +16,11 @@ object manejadorDeJuego{
 		game.boardGround("cielo1.jpg")
 		
 		//IMAGENES DEL MENÚ
-		game.addVisual(instrucciones)
+		game.addVisual(recuadro)
 		game.addVisual(teclas)
 		game.addVisual(titulo)
 		game.addVisual(space2)
+		game.addVisual(volumen)
 		
 		//BOTONES: para moverse entre un boton y otro es con "a" y "d", para seleccionar "space"
 		game.addVisual(botonPlay)
@@ -43,14 +44,16 @@ object manejadorDeJuego{
 		if (botonInstrucciones.seleccionado() and game.hasVisual(botonInstrucciones)) {
 			botonInstrucciones.cambiarImagen()
 			game.schedule(100,{game.removeVisual(botonInstrucciones)})
+			game.schedule(100,{game.removeVisual(volumen)})
 			game.schedule(100,{game.removeVisual(teclas)})
-			self.mostrarInstrucciones()
+			game.schedule(100,{game.addVisual(instrucciones)})
+			//self.mostrarInstrucciones()
 				
 		}
 		//else self.esperar() no hace falta
 	}
 	
-	method esperar() {}
+	//method esperar() {}
 	
 //	method borrarTodo(){ es mejor poner game.clear()
 //		game.schedule(100,{game.removeVisual(botonPlay)})
@@ -58,9 +61,6 @@ object manejadorDeJuego{
 //		game.schedule(100,{game.removeVisual(titulo)})
 //		game.schedule(100,{game.removeVisual(instrucciones)})
 //	}
-	method mostrarInstrucciones(){
-		//agregar imagenes de instrucciones
-	}
 	
 	method iniciarJuego(){		
 		//game.ground("cielo.png") //borrar esto si no queres ver las celdas
