@@ -26,6 +26,6 @@ Instrucciones:
 
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Curso: K2104 / Universidad Tecnologica Nacional(UTN)
+- Versión de wollok: 3.0
+- Una vez terminado, no tenemos problemas en que el repositorio sea público.
