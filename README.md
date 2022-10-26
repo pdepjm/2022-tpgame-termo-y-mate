@@ -17,9 +17,9 @@ Dodgy bird es un juego en solitario donde el jugador controla a Marvin, un pajar
 de obstaculos hasta conseguir el score más alto. A medida que avanza tambien se encuentra con monedas y vidas para recolectar.
 
 Instrucciones:
-- Con la tecla A, se mueve para al izquierda.
-- Con la tecla W, se mueve para arriba.
-- Con la tecla D, se mueve para la derecha. 
+- Con la tecla A se mueve para al izquierda.
+- Con la tecla W se mueve para arriba.
+- Con la tecla D se mueve para la derecha. 
 
 ## Otros
 
