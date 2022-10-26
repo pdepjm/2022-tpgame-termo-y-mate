@@ -14,7 +14,7 @@
 ## Reglas de Juego / Instrucciones
 
 Dodgy bird es un juego en solitario donde el jugador controla a Marvin, un pajaro que tiene que ir atravesando todo tipo 
-de obstaculos hasta conseguir el score más alto. A medida que avanza tambien se encuentra con monedas y vidas para recolectar.
+de obstaculos hasta conseguir el score más alto.
 
 Instrucciones:
 - Con la tecla A se mueve para al izquierda.
