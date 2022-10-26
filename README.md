@@ -26,6 +26,6 @@ Instrucciones:
 
 ## Otros
 
-- Curso: K2104 / Universidad Tecnologica Nacional(UTN)
+- Curso: K2104 / Universidad Tecnologica Nacional (UTN).
 - Versión de wollok: 3.0
 - Una vez terminado, no tenemos problemas en que el repositorio sea público.
