@@ -16,11 +16,9 @@ object manejadorDeJuego{
 		game.boardGround("cielo1.jpg")
 		
 		//IMAGENES DEL MENÚ
-		game.addVisual(recuadro)
-		game.addVisual(teclas)
 		game.addVisual(titulo)
 		game.addVisual(space2)
-		game.addVisual(volumen)
+		game.addVisual(informacionMenu)
 		
 		//BOTONES: para moverse entre un boton y otro es con "a" y "d", para seleccionar "space"
 		game.addVisual(botonPlay)
@@ -36,34 +34,26 @@ object manejadorDeJuego{
 	
 	method transicion(){
 		if (botonPlay.seleccionado() and game.hasVisual(botonPlay)) {
-			botonPlay.cambiarImagen()
-			//self.borrarTodo()
+			
 			game.clear()
 			game.schedule(100,{self.iniciarJuego()})
 		}
 		if (botonInstrucciones.seleccionado() and game.hasVisual(botonInstrucciones)) {
-			botonInstrucciones.cambiarImagen()
+			
 			game.schedule(100,{game.removeVisual(botonInstrucciones)})
-			game.schedule(100,{game.removeVisual(volumen)})
-			game.schedule(100,{game.removeVisual(teclas)})
-			game.schedule(100,{game.addVisual(instrucciones)})
-			//self.mostrarInstrucciones()
-				
-		}
-		//else self.esperar() no hace falta
+			game.schedule(100,{informacionMenu.pasarAlMenuInstrucciones()})
+			keyboard.del().onPressDo{self.volverAlMenuPrincipal()}
+		}	
+
 	}
-	
-	//method esperar() {}
-	
-//	method borrarTodo(){ es mejor poner game.clear()
-//		game.schedule(100,{game.removeVisual(botonPlay)})
-//		if(!botonInstrucciones.seleccionado()) {game.schedule(100, {game.removeVisual(botonInstrucciones) game.removeVisual(teclas)})}
-//		game.schedule(100,{game.removeVisual(titulo)})
-//		game.schedule(100,{game.removeVisual(instrucciones)})
-//	}
-	
-	method iniciarJuego(){		
-		//game.ground("cielo.png") //borrar esto si no queres ver las celdas
+	method volverAlMenuPrincipal(){
+		game.clear()
+		
+		self.iniciarPantallaDeInicio()
+		informacionMenu.pasarAlMenuPrincipal()
+	}
+
+	method iniciarJuego(){
   		fondo.cargarFondo()
   		game.addVisual(contador)
   		marvin.init()
