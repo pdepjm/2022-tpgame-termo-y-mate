@@ -42,7 +42,7 @@ object manejadorDeJuego{
 			
 			game.schedule(100,{game.removeVisual(botonInstrucciones)})
 			game.schedule(100,{informacionMenu.pasarAlMenuInstrucciones()})
-			keyboard.del().onPressDo{self.volverAlMenuPrincipal()}
+			keyboard.backspace().onPressDo{self.volverAlMenuPrincipal()}
 		}	
 
 	}
