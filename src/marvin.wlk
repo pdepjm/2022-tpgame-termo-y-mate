@@ -14,7 +14,7 @@ object marvin {
 		game.addVisual(self)
 		self.volar()
 		self.controles()
-		game.schedule(2000, {self.bajarSiempre()})
+		game.schedule(1000, {self.bajarSiempre()})
 	}
 	
 	method muerte() {
@@ -40,21 +40,25 @@ object marvin {
 		}
 		
 	method bajarSiempre(){ //que dicen?
-		game.onTick(2000, "bajarMarvin", {
-			const posicionAnterior = self.position()
-			
-			game.schedule(500, {if(self.position().y() == posicionAnterior.y() and self.position().y() != limiteAbajoMarvin) 
-				{
-				game.removeTickEvent("Volar")
-				game.schedule(300, {self.image("pajaro5.png")})
-				game.schedule(600, {self.image("pajaro6.png")})
-				//game.schedule(300, {self.image("pajaro7.png")})
-				game.schedule(900, {self.moverseA(abajoMarvin)})
-				game.schedule(100, {self.volar()})
-				 }
-			}) 
-			//game.onTick(300, "bajarSeguido", {keyboard.w().onPressDo{game.removeTickEvent("bajarSeguido")} self.moverseA(abajoMarvin)})
+		game.onTick(1000, "bajarMarvin", {
+			const posicionAnterior = self.position() 
+			game.schedule(500, {if(self.position().y() == posicionAnterior.y()) self.moverseA(abajoMarvin)}) 
 		})
+//		game.onTick(2000, "bajarMarvin", {
+//			const posicionAnterior = self.position()
+//			
+//			game.schedule(500, {if(self.position().y() == posicionAnterior.y() and self.position().y() != limiteAbajoMarvin) 
+//				{
+//				game.removeTickEvent("Volar")
+//				game.schedule(300, {self.image("pajaro5.png")})
+//				game.schedule(600, {self.image("pajaro6.png")})
+//				//game.schedule(300, {self.image("pajaro7.png")})
+//				game.schedule(900, {self.moverseA(abajoMarvin)})
+//				game.schedule(100, {self.volar()})
+//				 }
+//			}) 
+//			
+//		})
 		
 	}
 

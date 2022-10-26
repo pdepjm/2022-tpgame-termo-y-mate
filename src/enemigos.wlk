@@ -76,7 +76,7 @@ class Enemigo {
 }
 
 object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 7, valorSpawneoRandomXF=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
- 	const frecuenciaSpawneo = 23000
+ 	const frecuenciaSpawneo = 21000
  	const velocidadMax = 90 //maxima velocidad que alcanzara
 	method init(){
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 1, 0)
@@ -91,7 +91,7 @@ object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 
  }
 
 object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI = 12){ 
-	const frecuenciaSpawneo = 7000
+	const frecuenciaSpawneo = 5000
 	const velocidadMax = 30
 	method init(){
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 0, 1, 0)
@@ -106,7 +106,7 @@ object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI 
 }
 
 object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
-	const frecuenciaSpawneo = 14000
+	const frecuenciaSpawneo = 12000
 	const velocidadMax = 80
 	method init(){
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 0, 0)
@@ -121,7 +121,7 @@ object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir
 	
 object cazador inherits Enemigo (image = "JK_P_Gun__Attack_000.png", valorSpawneoRandomXI = 9, valorSpawneoRandomYI = 0, valorSpawneoRandomYF = 0)
 	{
-	const frecuenciaSpawneo = 29000
+	const frecuenciaSpawneo = 27000
 	
 	override method position(pos){ //necesito que sea getter
 		position = self.spawnearRandom()}

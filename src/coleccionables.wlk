@@ -27,7 +27,7 @@ class Coleccionable {
 		if(!game.hasVisual(self)){
 		game.addVisualIn(self, self.spawnearRandom(0,0)) 
 		}	
-		game.schedule(3500, {if(game.hasVisual(self)) game.removeVisual(self)})  //tiempo de espera para agarrar los poweUps
+		game.schedule(3000, {if(game.hasVisual(self)) game.removeVisual(self)})  //tiempo de espera para agarrar los poweUps
 		 	}	)
 }
 }
