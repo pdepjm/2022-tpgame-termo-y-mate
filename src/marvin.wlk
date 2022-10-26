@@ -18,7 +18,6 @@ object marvin {
 	}
 	
 	method muerte() {
-		//self.actualizarImagen("pajaroMuerto4.png")
 		game.schedule(100, {self.image("pajaroMuerto1.png")})
 		game.schedule(200, {self.image("pajaroMuerto2.png")})
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
@@ -43,23 +42,7 @@ object marvin {
 		game.onTick(1000, "bajarMarvin", {
 			const posicionAnterior = self.position() 
 			game.schedule(500, {if(self.position().y() == posicionAnterior.y()) self.moverseA(abajoMarvin)}) 
-		})
-//		game.onTick(2000, "bajarMarvin", {
-//			const posicionAnterior = self.position()
-//			
-//			game.schedule(500, {if(self.position().y() == posicionAnterior.y() and self.position().y() != limiteAbajoMarvin) 
-//				{
-//				game.removeTickEvent("Volar")
-//				game.schedule(300, {self.image("pajaro5.png")})
-//				game.schedule(600, {self.image("pajaro6.png")})
-//				//game.schedule(300, {self.image("pajaro7.png")})
-//				game.schedule(900, {self.moverseA(abajoMarvin)})
-//				game.schedule(100, {self.volar()})
-//				 }
-//			}) 
-//			
-//		})
-		
+		})		
 	}
 
     method moverseA(direccion) {
