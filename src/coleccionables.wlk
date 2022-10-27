@@ -76,7 +76,7 @@ object monedero{
 object corazon inherits Coleccionable (image = "corazon.png"){
 
 	method init(){
-		self.spawnearColeccionable(45000) //mientras no supere el maximo de vidas permitido (falta eso)
+		self.spawnearColeccionable(45000) 
 	}
 	method colisionadoPor(){
 		//marvin.sumarVidas(self)

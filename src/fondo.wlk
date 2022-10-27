@@ -27,5 +27,5 @@ object fondo {
 			{movimientos.moverLeft(nubesita,1)} else {nubesita.volverADerecha()}            }         )     }     )
 }
 		
-} // CERRAMOS EL METODO CARGAR FONDO
+} 
 

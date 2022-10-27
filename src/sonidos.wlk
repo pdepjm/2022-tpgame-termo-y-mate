@@ -23,7 +23,7 @@ object sonido{
 
 object musicaFondo {
 	const soundtrack = game.sound("pencil-maze.mp3")
-	
+	var volumen = 1
 	method play() {		
 		soundtrack.shouldLoop(true)
 		game.schedule(500,{soundtrack.play()})
@@ -41,9 +41,11 @@ object musicaFondo {
 		soundtrack.pause()
 	}
 	method subirVolumen() {
-		soundtrack.volume(1.min(soundtrack.volume() * 1.2))
+		volumen = 1.min(volumen * 1.2)
+		soundtrack.volume(volumen)
 	}
 	method bajarVolumen() {
-		soundtrack.volume(0.max(soundtrack.volume() * 0.8))
+		volumen = 0.max (volumen * 0.8)
+		soundtrack.volume(volumen)
 	}
 }

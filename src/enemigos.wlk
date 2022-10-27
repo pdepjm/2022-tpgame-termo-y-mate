@@ -205,30 +205,3 @@ object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
 	}
 }
 
-//object nubeElectrica inherits Enemigo (image = "badCloud.png" , valorSpawneoRandomXI = 0,
-//valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 7) // el limite de marvin
-//	{
-//		const resetPosition=position
-//		const velocidadNube = 10000
-//		//const frecuenciaSpawneo = 15000
-//		
-//	override method spawnearRandom (){
-//		const x = (valorSpawneoRandomXI.. limiteDerechoMarvin).anyOne()
-//		const y = valorSpawneoRandomYF
-//		game.say(marvin, "Â¡Se aproxima una nube electrica!")
-//		return game.at(x,y) }	
-//	
-//	method volverADerecha() { 
-//		position = resetPosition } 	
-//		
-//	method init(){
-//	game.onTick(velocidadNube,"moverNube",{if (ubicacion.posicionX(self) != ubicacion.posicionX(marvin))
-//			{movimientos.moverLeft(self,1)} else { 
-//				game.removeVisual(self)
-//				self.spawnearRandom ()
-//				self .volverADerecha()
-//			} } ) }        
-//			
-//	
-//
-//}
