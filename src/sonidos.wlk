@@ -41,9 +41,9 @@ object musicaFondo {
 		soundtrack.pause()
 	}
 	method subirVolumen() {
-		soundtrack.volume(soundtrack.volume() * 1.2)
+		soundtrack.volume(1.min(soundtrack.volume() * 1.2))
 	}
 	method bajarVolumen() {
-		soundtrack.volume(soundtrack.volume() * 0.8)
+		soundtrack.volume(0.max(soundtrack.volume() * 0.8))
 	}
 }
