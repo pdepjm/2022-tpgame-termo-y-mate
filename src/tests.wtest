@@ -4,7 +4,7 @@ import enemigos.*
 import direcciones.*
 import manejador.*
 import coleccionables.*
-
+import sonidos.*
 
 //en verde 
 describe "movimientos de Marvin" {
@@ -28,41 +28,22 @@ describe "movimientos de Marvin" {
 }
 
 
-//describe "habilidades de marvin" {
-//	test "Marvin agarra una moneda" { 
-//		//const moneda = new Moneda(position = game.at(2,4)) //agregar addvisual
-//		marvin.moverse(derecha)
-//		moneda.colisionadoPor() //comentando la linea 93 funciona sino hay aparece una exception "El componente visual no se encuentra en el tsblero"
-//		assert.equals(10, marvin.puntos())
-//	}
-//	
-//	test "Marvin agarra un corazon" {
-//		//const corazon = new Corazon(position = game.at(2,4))
-//		marvin.moverse(derecha)
-//		corazon.colisionadoPor() //pasa lo mismo que en el test anterior, comentando la linea 115 funciona sino aparece el exception
-//		assert.equals(2, marvin.vidas())
-//	}
-//}
 
 describe "interacciones de Marvin con el enemigo: "{
 	
-	method initialize() {
-		const nuevoEnemigo = new Enemigo (position = game.at(2,4))
-	}
+	const nuevoEnemigo = new Enemigo (position = game.at(2,4))
+	
 	
 	test"Cuando marvin choca con un enemigo se le resta una vida y muere (vidas = 1)"{
-		const nuevoEnemigo = new Enemigo ()
-		//marvin.moverseA(derechaMarvin)
+		marvin.moverseA(derechaMarvin)
 		nuevoEnemigo.colisionadoPor()
 		assert.that(not marvin.estaVivo() && saludMarvin.vidas() == 0)
 	}
 	
-	test"cuando marvin posee 2 vidas, choca con un enemigo se le resta una vida y no muere)"{ //lo mismo para tres vidas, se le resta y no muere
-	 	const nuevoEnemigo = new Enemigo ()
-	 	const corazon = new Coleccionable() 
-	 	saludMarvin.sumarVidas(corazon)//para aumentar la vida incial de marvin a dos
+	test"cuando marvin posee 2 vidas, choca con un enemigo se le resta una vida y no muere)"{
+	 	saludMarvin.sumarVidas()//para aumentar la vida incial de marvin a dos
 	 	nuevoEnemigo.colisionadoPor()
-	 	//marvin.moverseA(derechaMarvin)
+	 	marvin.moverseA(derechaMarvin)
 	 	assert.that(marvin.estaVivo())
 	 	assert.equals(1,saludMarvin.vidas())
 	}
@@ -78,29 +59,29 @@ describe "interacciones con el objeto moneda: "{
 		const unaMoneda = new Coleccionable(position = game.at(2,4))
 		marvin.moverseA(derechaMarvin)
 		monedero.sumarPuntos(unaMoneda)
-		assert.equals(1,monedero.puntos())
+		assert.equals(1, monedero.puntos())
 		
 	}
 	test"cuando marvin no agarra una moneda, su monedero queda igual"{ //inicio con 0 monedas.
-		assert.equals(0,monedero.puntos())
+		assert.equals(0, monedero.puntos())
 	}
 }
 
 describe"interacciones con el objeto corazon"{
+	
  	test"cuando marvin agarra un corazon se le suma una vida"{
- 		const unCorazon = new Coleccionable()
- 		saludMarvin.sumarVidas(unCorazon)
+ 		
+ 		saludMarvin.sumarVidas()
  		assert.equals(2,saludMarvin.vidas())
  	}
  	test"cuando marvin agarra mas de 3 corazones, el contador de corazones queda en 3"{
- 		const unCorazon = new Coleccionable()
- 		4.times({n => saludMarvin.sumarVidas(unCorazon)})
+ 		
+ 		4.times({n => saludMarvin.sumarVidas()})
  		assert.equals(3,saludMarvin.vidas())
  	}
  	test"cuando marvin pierde mas de 3 vidas, el contador de corazones queda en 0 y no baja"{
  		const nuevoEnemigo = new Enemigo ()
- 		const unCorazon = new Coleccionable()
- 		2.times({n=>saludMarvin.sumarVidas(unCorazon)})
+ 		2.times({n=>saludMarvin.sumarVidas()})
  		4.times({n => nuevoEnemigo.colisionadoPor()})
  		assert.equals(0,saludMarvin.vidas())	
  	}

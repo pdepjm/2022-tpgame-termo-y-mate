@@ -22,7 +22,7 @@ object marvin {
 		game.schedule(200, {self.image("pajaroMuerto2.png")})
 		game.schedule(300, {self.image("pajaroMuerto3.png")})
 		game.schedule(400, {self.image("pajaroMuerto4.png")})
-		sonido.aplicarSonido("muerteMarvin.wav")
+		game.schedule(100, {sonido.aplicarSonido("muerteMarvin.wav")})
 		if(saludMarvin.vidas() == 0){
 		game.schedule(500, {manejadorDeJuego.juegoFinalizado()}) 
 		estaVivo = false
@@ -61,15 +61,17 @@ object saludMarvin{
 	var property position = game.at(12,4)
 	var property vidas = 1
 
-	method sumarVidas(unCorazon){
-		if(vidas == 3) {} else vidas += 1
+	method sumarVidas(){
+		vidas = 3.min(vidas + 1)
 	}
-	method restarVidas(){vidas -= 1}
+	method restarVidas(){
+		vidas = 0.max(vidas-1)
+	}
 
 	method text() = vidas.toString()
 	method textColor() = "000000"
 
 	method init(){
 		game.addVisual(self)
-		game.schedule(100,{self.vidas()})}
+		game.schedule(100, {self.vidas()})}
 }		

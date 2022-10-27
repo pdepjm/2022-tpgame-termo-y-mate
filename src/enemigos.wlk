@@ -98,7 +98,7 @@ object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI 
 	}
 	
 	override method crearEnemigoPosRandom(imagen){
-		const nuevoEnemigo = new Enemigo(image = ["Helicopter.png", "avion.png", "Bird.png"].anyOne(), position = self.spawnearRandom())
+		const nuevoEnemigo = new Enemigo(image = ["Helicopter.png", "avion.png", "Bird.png" ].anyOne(), position = self.spawnearRandom())
 		sonido.sonidoEnemigo(nuevoEnemigo.image())
 		game.addVisual(nuevoEnemigo)
 		listaEnemigos.add(nuevoEnemigo)

@@ -82,7 +82,7 @@ object corazon inherits Coleccionable (image = "corazon.png"){
 		//marvin.sumarVidas(self)
 		sonido.aplicarSonido("corazon.mp3")
 		game.removeVisual(self)  
-		saludMarvin.sumarVidas(self) 
+		saludMarvin.sumarVidas() 
 		
 		 }  		
 }
