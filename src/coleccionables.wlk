@@ -4,6 +4,7 @@ import direcciones.*
 import marvin.*
 import sonidos.*
 import manejador.*
+import menu.*
 
 object iniciarColeccionables {
 	method init (){
@@ -71,6 +72,12 @@ object monedero{
 	method init(){
 		game.addVisual(self)
 		game.schedule(100,{self.puntos()})}
+	
+	method mostrarMonedero(){
+		position = game.at(5,6)
+		game.addVisual(self)
+		game.addVisual(imagenMoneda)
+	}
 }
 
 object corazon inherits Coleccionable (image = "corazon.png"){

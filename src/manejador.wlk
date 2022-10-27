@@ -68,6 +68,8 @@ object manejadorDeJuego{
 	method juegoFinalizado(){
 			game.clear()
 			game.schedule(100, {game.addVisual(fin)})
+			game.schedule(100, {score.mostrarScore()})
+			game.schedule(100, {monedero.mostrarMonedero()})
 			//podemos hacer que vuelva al menu de inicio (falta menu)
       }
 }
@@ -88,6 +90,13 @@ object score{
 		game.addVisual(self)
 		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
 		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}
+	
+	method mostrarScore(){
+		position = game.at(5,5)
+		game.addVisual(self)
+		game.addVisual(imagenScore)
+	}
+	
 	}
 
 
