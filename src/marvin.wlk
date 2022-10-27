@@ -64,7 +64,7 @@ object saludMarvin{
 	method sumarVidas(){
 		vidas = 3.min(vidas + 1)
 	}
-	method restarVidas(){
+	method restarVidas(){ // mandar un solo mensaje desde collisionadoPor cuando marvin muere
 		vidas = 0.max(vidas-1)
 	}
 

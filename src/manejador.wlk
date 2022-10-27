@@ -68,7 +68,7 @@ object manejadorDeJuego{
 	method juegoFinalizado(){
 			game.clear()
 			game.schedule(100, {game.addVisual(fin)})
-			//game.schedule(100, {game.addVisual(puntajeFinal)})
+			game.schedule(100, {score.mostrarScore()})
 			game.schedule(100, {monedero.mostrarMonedero()})
 			//podemos hacer que vuelva al menu de inicio (falta menu)
       }
@@ -92,7 +92,7 @@ object score{
 		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}
 	
 	method mostrarScore(){
-		position = game.at(7,7)
+		//position = game.at(7,7)
 		game.addVisualIn(self, game.at(7,2))
 		game.addVisual(imagenScore)
 	}
