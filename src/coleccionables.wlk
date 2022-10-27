@@ -74,7 +74,7 @@ object monedero{
 		game.schedule(100,{self.puntos()})}
 	
 	method mostrarMonedero(){
-		position = game.at(5,6)
+		position = game.at(7,8)
 		game.addVisual(self)
 		game.addVisual(imagenMoneda)
 	}

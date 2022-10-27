@@ -9,8 +9,8 @@ class Imagen {
 const titulo = new Imagen(position = game.at(2,3), image = "TituloDodgyBirdGrande2.png")
 const space2 = new Imagen(position = game.at(4,0), image = "texto-space2.png")
 const contador = new Imagen(position = game.at(12,4), image = "contador2.png")
-const imagenScore = new Imagen(position = game.at(4,5), image = "score2.png")
-const imagenMoneda = new Imagen(position = game.at(4,6), image = "moneda1.png")
+const imagenScore = new Imagen(position = game.at(6,7), image = "score2.png")
+const imagenMoneda = new Imagen(position = game.at(6,8), image = "moneda 1.png")
 
 object botonPlay inherits Imagen(position = game.at(4,1), image ="botonPlayCeleste.png") {
 	var property seleccionado = false

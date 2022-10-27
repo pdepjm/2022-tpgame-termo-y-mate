@@ -92,7 +92,7 @@ object score{
 		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}
 	
 	method mostrarScore(){
-		position = game.at(5,5)
+		position = game.at(7,7)
 		game.addVisual(self)
 		game.addVisual(imagenScore)
 	}
