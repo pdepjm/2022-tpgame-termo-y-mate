@@ -72,23 +72,24 @@ object manejadorDeJuego{
 			
 		game.schedule(100, {score.mostrarScore()})
 		game.schedule(100, {monedero.mostrarMonedero()})
+		keyboard.enter().onPressDo{self.volverAIniciar()}
 		//podemos hacer que vuelva al menu de inicio (falta menu)
 	}
+	method volverAIniciar() {
+		game.clear()
+		self.iniciarJuego()
+	}
 }
-/*
-object fin{
-	var property position = game.at(4,3)
-	var property image = "gameover.png"
-}
-*/
+
 object score{
 	var property position = game.at(12,6)
-	var contadorKms = 0
+	var contadorKms// = 0
 	
 	method adicionarScorePorMoneda(){contadorKms+=50}
 	method text() = contadorKms.toString()
 	method textColor() = "000000"
 	method init(){
+		contadorKms = 0
 		game.addVisual(self)
 		//game.say(self,"Recorrido = "+ contadorKms + "Kms")
 		game.onTick(500,"RecorridoEnMetros",{contadorKms += 1})}

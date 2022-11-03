@@ -4,13 +4,16 @@ import manejador.*
 import sonidos.*
 
 object marvin {
-	var property position = game.at(1,4)
+	var property position// = game.at(1,4)
 	var property positionSig = position
 	var property estaVivo = true
-	var property image = "pajaro1.png"
-	var property puntos = 0
+	var property image// = "pajaro1.png"
+	var property puntos// = 0
 	
 	method init() {
+		position = game.at(1,4)
+		image = "pajaro1.png"
+		puntos = 0
 		game.addVisual(self)
 		self.volar()
 		self.controles()
@@ -38,10 +41,10 @@ object marvin {
 		})
 		}
 		
-	method bajarSiempre(){ //que dicen?
-		game.onTick(1000, "bajarMarvin", {
+	method bajarSiempre(){ //valores originales 1000 en onTick, 500 en schedule
+		game.onTick(500, "bajarMarvin", {
 			const posicionAnterior = self.position() 
-			game.schedule(500, {if(self.position().y() == posicionAnterior.y()) self.moverseA(abajoMarvin)}) 
+			game.schedule(400, {if(self.position().y() == posicionAnterior.y()) self.moverseA(abajoMarvin)}) 
 		})		
 	}
 
@@ -59,7 +62,7 @@ object marvin {
 
 object saludMarvin{
 	var property position = game.at(12,4)
-	var property vidas = 1
+	var property vidas// = 1
 
 	method sumarVidas(){
 		vidas = 3.min(vidas + 1)
@@ -72,6 +75,7 @@ object saludMarvin{
 	method textColor() = "000000"
 
 	method init(){
+		vidas = 1
 		game.addVisual(self)
 		game.schedule(100, {self.vidas()})}
 }		

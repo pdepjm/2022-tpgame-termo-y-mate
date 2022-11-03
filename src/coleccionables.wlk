@@ -62,7 +62,7 @@ object moneda inherits Coleccionable {
 	}
 object monedero{
 	var property position = game.at(12,5)
-	var property puntos = 0
+	var property puntos// = 0
 
 	method sumarPuntos(unaMoneda){puntos += 1}
 
@@ -70,6 +70,7 @@ object monedero{
 	method textColor() = "000000"
 
 	method init(){
+		puntos = 0
 		game.addVisual(self)
 		game.schedule(100,{self.puntos()})}
 	
