@@ -9,9 +9,11 @@ class Imagen {
 const titulo = new Imagen(position = game.at(2,3), image = "TituloDodgyBirdGrande2.png")
 const space2 = new Imagen(position = game.at(4,0), image = "texto-space2.png")
 const contador = new Imagen(position = game.at(12,4), image = "contador2.png")
-const imagenScore = new Imagen(position = game.at(6,2), image = "score3.png")
-const imagenMoneda = new Imagen(position = game.at(6,3), image = "moneda 1.png")
-//const puntajeFinal = new Imagen(position = game.at(2,2), image = "puntajeFinal.png")
+//const imagenScore = new Imagen(position = game.at(6,2), image = "score3.png")
+//const imagenMoneda = new Imagen(position = game.at(6,3), image = "moneda 1.png")
+const puntajeFinal = new Imagen(position = game.at(5,2), image = "puntajeFinal.png")
+const recuadroFinal = new Imagen(position = game.at(2,1), image = "recuadroJuegoFinalizado.png")
+const gameOver = new Imagen(position = game.at(4,3), image = "gameover.png")
 
 object botonPlay inherits Imagen(position = game.at(4,1), image ="botonPlayCeleste.png") {
 	var property seleccionado = false

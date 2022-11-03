@@ -76,7 +76,7 @@ object monedero{
 	method mostrarMonedero(){
 		//position = game.at(7,8)
 		game.addVisualIn(self, game.at(7,3))
-		game.addVisual(imagenMoneda)
+		//game.addVisual(imagenMoneda)
 	}
 }
 

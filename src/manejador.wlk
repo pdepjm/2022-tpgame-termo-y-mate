@@ -9,7 +9,6 @@ import sonidos.*
 object manejadorDeJuego{
 	method iniciarPantallaDeInicio(){
 		// SONIDO
-		musicaFondo.play()
 		musicaFondo.controlesMusica() // flechas arriba y abajo para cambiar volumen, "p" para pausar, "r" para resume (despues puedo cambiar a otras teclas si quieren)
 		
 		//FONDO DE PANTALLA
@@ -66,19 +65,22 @@ object manejadorDeJuego{
 	
 	//cuando finaliza el juego
 	method juegoFinalizado(){
-			game.clear()
-			game.schedule(100, {game.addVisual(fin)})
-			game.schedule(100, {score.mostrarScore()})
-			game.schedule(100, {monedero.mostrarMonedero()})
-			//podemos hacer que vuelva al menu de inicio (falta menu)
-      }
+		game.clear()
+		game.schedule(100, {game.addVisual(recuadroFinal)})
+		game.schedule(100, {game.addVisual(puntajeFinal)})
+		game.schedule(100, {game.addVisual(gameOver)})
+			
+		game.schedule(100, {score.mostrarScore()})
+		game.schedule(100, {monedero.mostrarMonedero()})
+		//podemos hacer que vuelva al menu de inicio (falta menu)
+	}
 }
-
+/*
 object fin{
 	var property position = game.at(4,3)
 	var property image = "gameover.png"
 }
-
+*/
 object score{
 	var property position = game.at(12,6)
 	var contadorKms = 0
@@ -94,7 +96,7 @@ object score{
 	method mostrarScore(){
 		//position = game.at(7,7)
 		game.addVisualIn(self, game.at(7,2))
-		game.addVisual(imagenScore)
+		//game.addVisual(imagenScore)
 	}
 	
 	}
