@@ -11,10 +11,7 @@ const limitePantallaY = game.height()-1 //limite de Y en pantalla
 object iniciarEnemigos{
 	
 	method init(){
-		cazador.init()
-		misil.init()
-		aereosHorizontal.init()
-		aereosDiagonal.init()
+		game.schedule(1000, {cazador.init() misil.init() aereosHorizontal.init() aereosDiagonal.init()})
 	}	
 }
 
@@ -35,27 +32,31 @@ class Enemigo {
 		}
 
 	method dentroDelMapa (objeto) = ubicacion.posicionY(objeto) != limiteDESPAWNFondoY and ubicacion.posicionX(objeto) != limiteDESPAWNFondoX //dice si el objeto esta dentro del mapa o no
-
-	method moverEnemigo(valorUp, valorDown, valorLeft, valorRight)//cantidad de celdas que se mueve en cada direccion. Poner 0 en la direccion que no se va a mover
-		{ 
-		self.crearEnemigoPosRandom(image)
-		game.onTick(velocidad,"moverEnemigo",{listaEnemigos.forEach( {enemigo => 
-			if (self.dentroDelMapa(enemigo)) 
-			{	movimientos.moverUp(enemigo, valorUp)
-				movimientos.moverDown(enemigo, valorDown)
-				movimientos.moverLeft(enemigo, valorLeft) 
-				movimientos.moverRight(enemigo, valorRight)
-			}
-			else {self.eliminarEnemigo(enemigo) game.schedule(3000, {game.removeTickEvent("moverEnemigo")}) 
-				} } ) } )
-				}
-	
 	method lanzarEnemigo(frecuenciaSpawneo, velocidadMax, valorUp, valorDown, valorLeft, valorRight){ 
 			game.onTick(frecuenciaSpawneo, "lanzarEnemigo", {
 				self.moverEnemigo(valorUp, valorDown, valorLeft, valorRight)
 				if(velocidad != velocidadMax){ 
 				velocidad = velocidadMax.max((velocidad - (velocidad * 0.1))) //los enemigos van aumentando su velocidad progresivamente
 				}}) }
+	
+	method moverEnemigo(valorUp, valorDown, valorLeft, valorRight)//cantidad de celdas que se mueve en cada direccion. Poner 0 en la direccion que no se va a mover
+		{ 
+		self.crearEnemigoPosRandom(image)
+		game.onTick(velocidad,"moverEnemigo", {listaEnemigos.forEach( {enemigo => 
+			if (self.dentroDelMapa(enemigo)) 
+			{	
+				self.moverseDentroDelMapa(enemigo, valorUp, valorDown, valorLeft, valorRight)
+			}
+			else self.eliminarEnemigo(enemigo) } ) } ) }
+			
+	method moverseDentroDelMapa(enemigo, valorUp, valorDown, valorLeft, valorRight)
+	{
+				movimientos.moverUp(enemigo, valorUp)
+				movimientos.moverDown(enemigo, valorDown)
+				movimientos.moverLeft(enemigo, valorLeft) 
+				movimientos.moverRight(enemigo, valorRight)
+	}
+
 					
 	method crearEnemigoPosRandom(imagen){
 		const nuevoEnemigo = new Enemigo(image = imagen, position = self.spawnearRandom())
@@ -70,15 +71,22 @@ class Enemigo {
 		return game.at(x,y) }
 		
 	method eliminarEnemigo(enemigo){
-		game.removeVisual(enemigo)
-		listaEnemigos.remove(enemigo)}
+		if(game.hasVisual(enemigo))
+		{
+			game.removeVisual(enemigo)
+			game.schedule(2000, {game.removeTickEvent("moverEnemigo")})
+		}
+		listaEnemigos.remove(enemigo)
+
+		}
 			
 }
 
-object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 7, valorSpawneoRandomXF=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
+object aereosDiagonal inherits Enemigo (valorSpawneoRandomXI = 7, valorSpawneoRandomXF=11, valorSpawneoRandomYI = 7, valorSpawneoRandomYF = 11 ){
  	const frecuenciaSpawneo = 21000
  	const velocidadMax = 90 //maxima velocidad que alcanzara
 	method init(){
+		velocidad = 300
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 1, 0)
 	}
 				
@@ -90,10 +98,11 @@ object aereosDiagonal inherits Enemigo (velocidad = 300, valorSpawneoRandomXI = 
 	}
  }
 
-object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI = 12){ 
+object aereosHorizontal inherits Enemigo (valorSpawneoRandomXI = 12){ 
 	const frecuenciaSpawneo = 5000
 	const velocidadMax = 30
 	method init(){
+		velocidad = 190
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 0, 1, 0)
 	}
 	
@@ -105,10 +114,11 @@ object aereosHorizontal inherits Enemigo (velocidad = 170, valorSpawneoRandomXI 
 	}
 }
 
-object misil inherits Enemigo(velocidad = 250, image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
+object misil inherits Enemigo(image = "Missile.png"){ //decidir si poner la imagen de bomba o misil
 	const frecuenciaSpawneo = 12000
 	const velocidadMax = 80
 	method init(){
+		velocidad = 250
 		self.lanzarEnemigo(frecuenciaSpawneo, velocidadMax, 0, 1, 0, 0)
 	}
 		override method spawnearRandom (){
@@ -200,7 +210,8 @@ object lanzadorDeBalas inherits Enemigo (velocidad = 250) {
 		balas.add(bala)
 	}
 	method eliminarBala(bala){
-		game.removeVisual(bala)
+		if(game.hasVisual(bala))
+		{game.removeVisual(bala)}
 		balas.remove(bala)
 	}
 }

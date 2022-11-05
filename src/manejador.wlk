@@ -77,6 +77,7 @@ object manejadorDeJuego{
 	}
 	method volverAIniciar() {
 		game.clear()
+		
 		self.iniciarJuego()
 	}
 }
