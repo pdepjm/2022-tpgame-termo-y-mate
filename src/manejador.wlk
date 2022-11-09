@@ -23,9 +23,9 @@ object manejadorDeJuego{
 		game.addVisual(botonPlay)
 		game.addVisual(botonInstrucciones)
 		keyboard.a().onPressDo{botonPlay.cambiarImagen()}
-		keyboard.d().onPressDo{botonPlay.cambiarImagen2()}
+		keyboard.d().onPressDo{botonPlay.volverALaOriginal()}
 		keyboard.d().onPressDo{botonInstrucciones.cambiarImagen()}
-		keyboard.a().onPressDo{botonInstrucciones.cambiarImagen2()}
+		keyboard.a().onPressDo{botonInstrucciones.volverALaOriginal()}
 		
 		//INICIO JUEGO
 		keyboard.space().onPressDo{self.transicion()}
@@ -69,12 +69,28 @@ object manejadorDeJuego{
 		game.schedule(100, {game.addVisual(recuadroFinal)})
 		game.schedule(100, {game.addVisual(puntajeFinal)})
 		game.schedule(100, {game.addVisual(gameOver)})
+		game.schedule(100, {game.addVisual(botonesMenuReinicio)})
 			
 		game.schedule(100, {score.mostrarScore()})
 		game.schedule(100, {monedero.mostrarMonedero()})
 		keyboard.enter().onPressDo{self.volverAIniciar()}
+		keyboard.a().onPressDo{botonesMenuReinicio.cambiarImagen()}
+		keyboard.d().onPressDo{botonesMenuReinicio.volverALaOriginal()}
+		keyboard.space().onPressDo{self.transicion2()}
+		
 		//podemos hacer que vuelva al menu de inicio (falta menu)
 	}
+	
+	method transicion2() {
+		if (botonesMenuReinicio.menuSeleccionado() and game.hasVisual(botonesMenuReinicio)) {
+			game.schedule(100,{self.volverAlMenuPrincipal()})
+		}
+		
+		if (botonesMenuReinicio.reiniciarSeleccionado() and game.hasVisual(botonesMenuReinicio)) {
+			game.schedule(100,{self.volverAIniciar()})
+		}
+	}
+	
 	method volverAIniciar() {
 		game.clear()
 		
