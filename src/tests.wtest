@@ -1,6 +1,97 @@
+import marvin.*
+import wollok.game.*
+import enemigos.*
+import direcciones.*
+import manejador.*
+import coleccionables.*
+import sonidos.*
 
-test "testX" {
-
-	assert.that(true)
-
+//en verde 
+describe "movimientos de Marvin" {
+	
+	test"Marvin se mueve para arriba"{
+		marvin.moverseA(arribaMarvin)
+		assert.equals(game.at(1, 5), marvin.position())
+	}
+	test"Marvin se mueve para abajo"{
+		marvin.moverseA(abajoMarvin)
+		assert.equals(game.at(1, 3), marvin.position())
+	}
+	test "Marvin se mueve para la derecha"{
+		marvin.moverseA(derechaMarvin)
+		assert.equals(game.at(2, 4), marvin.position())
+	}
+	test "Marvin se mueve para la izquierda"{
+		marvin.moverseA(izquierdaMarvin)
+		assert.equals(game.at(0, 4), marvin.position())
+	}
 }
+
+
+
+describe "interacciones de Marvin con el enemigo: "{
+	
+	const nuevoEnemigo = new Enemigo (position = game.at(2,4))
+	
+	
+	test"Cuando marvin choca con un enemigo se le resta una vida y muere (vidas = 1)"{
+		marvin.moverseA(derechaMarvin)
+		nuevoEnemigo.colisionadoPor()
+		assert.that(not marvin.estaVivo() && saludMarvin.vidas() == 0)
+	}
+	
+	test"cuando marvin posee 2 vidas, choca con un enemigo se le resta una vida y no muere)"{
+	 	saludMarvin.sumarVidas()//para aumentar la vida incial de marvin a dos
+	 	nuevoEnemigo.colisionadoPor()
+	 	marvin.moverseA(derechaMarvin)
+	 	assert.that(marvin.estaVivo())
+	 	assert.equals(1,saludMarvin.vidas())
+	}
+	
+	test"cuando marvin no choca con un enemigo esta vivo"{
+		assert.that(marvin.estaVivo())
+	}
+}
+
+
+describe "interacciones con el objeto moneda: "{
+	test"cuando marvin agarra una moneda, se le suma 1 moneda"{
+		const unaMoneda = new Coleccionable(position = game.at(2,4))
+		marvin.moverseA(derechaMarvin)
+		monedero.sumarPuntos(unaMoneda)
+		assert.equals(1, monedero.puntos())
+		
+	}
+	test"cuando marvin no agarra una moneda, su monedero queda igual"{ //inicio con 0 monedas.
+		assert.equals(0, monedero.puntos())
+	}
+}
+
+describe"interacciones con el objeto corazon"{
+	
+ 	test"cuando marvin agarra un corazon se le suma una vida"{
+ 		
+ 		saludMarvin.sumarVidas()
+ 		assert.equals(2,saludMarvin.vidas())
+ 	}
+ 	test"cuando marvin agarra mas de 3 corazones, el contador de corazones queda en 3"{
+ 		
+ 		4.times({n => saludMarvin.sumarVidas()})
+ 		assert.equals(3,saludMarvin.vidas())
+ 	}
+ 	test"cuando marvin pierde mas de 3 vidas, el contador de corazones queda en 0 y no baja"{
+ 		const nuevoEnemigo = new Enemigo ()
+ 		2.times({n=>saludMarvin.sumarVidas()})
+ 		4.times({n => nuevoEnemigo.colisionadoPor()})
+ 		assert.equals(0,saludMarvin.vidas())	
+ 	}
+}
+
+
+
+
+
+
+
+
+

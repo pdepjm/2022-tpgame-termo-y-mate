@@ -1,8 +1,20 @@
 import wollok.game.*
-import pepita.*
+import marvin.*
+import direcciones.*
+import fondo.*
+import enemigos.*
+import manejador.*
+import sonidos.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.start()
+	game.title("Dodgy Bird")
+	game.width(13)               
+ 	game.height(7) 
+  	game.cellSize(100)
+  	musicaFondo.play()
+  	
+  	manejadorDeJuego.iniciarPantallaDeInicio()
+  	game.start()
 }
+
+
